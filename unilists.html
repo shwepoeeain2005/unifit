@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unifit</title>
+    <link rel="stylesheet" href="assets/css/unilists.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/nav.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-yxz..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+ <nav class="links">
+  <!-- Logo -->
+  <div class="logo">
+    <i class="fas fa-graduation-cap logo-icon"></i>
+    <span class="logo-text">UniFit</span>
+  </div>
+
+  <!-- Hamburger Icon for mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="unilists.html"class="active">University Lists</a></li>
+    <li><a href="search.html">Search Your Uni</a></li>
+    <li><a href="req1.html">Requirements</a></li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+    <h2>List of Universities</h2>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search universities regions...">
+    </div>
+  
+    <script>
+function searchFunction() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let items = document.querySelectorAll(".item");
+
+    items.forEach(item => {
+        let text = item.textContent.toLowerCase();
+        if (text.includes(input)) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+</script>
+
+
+     <div class="filter-buttons">
+  <button type="button" data-category="all" aria-pressed="true" class="active">All</button>
+  <button type="button" data-category="medicine" aria-pressed="false">Medicine</button>
+  <button type="button" data-category="tu" aria-pressed="false">TU</button>
+  <button type="button" data-category="cu" aria-pressed="false">CU</button>
+  <button type="button" data-category="pu" aria-pressed="false">PU</button>
+  <button type="button" data-category="Art&science" aria-pressed="false">Art &<br> Science</button>
+  <button type="button" data-category="eco" aria-pressed="false">Economics</button>
+  <button type="button" data-category="foreign" aria-pressed="false">Foreign<br> Language</button>
+  <button type="button" data-category="Management" aria-pressed="false">Co-operative <br>and Management<br> Science</button>
+  <button type="button" data-category="art" aria-pressed="false">Art &<br> Culture</button>
+  <button type="button" data-category="maritime" aria-pressed="false">Maritime</button>
+  <button type="button" data-category="Aerospace" aria-pressed="false">Aerospace</button>
+  <button type="button" data-category="Education" aria-pressed="false">Education</button>
+  <button type="button" data-category="agriculture" aria-pressed="false">Agriculture & <br> Forestry</button>
+</div>
+
+    <div class="card-group">
+</div>
+<template id="university-card-template">
+    <div class="card">
+        <img>
+        <div class="layer"></div>
+        <div class="info">
+            <h1></h1>
+            <p></p><br>
+            <button>See More</button>
+        </div>
+    </div>
+</template>
+
+<script src="data/universities.js"></script>
+<script defer src="assets/js/university-list.js?v=combined-filters"></script>
+
+    <div class="card-group">
+    </div>
+<div id="no-results-message" style="display: none; text-align: center; font-size: 1.5rem; color: #555; margin-top: 50px;">
+    No result is found.
+</div>
+  
+    <button id="backToTop">
+    <span>↑</span>
+    </button>
+    
+    <script>
+       const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+    const btn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    btn.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+  
+<footer class="glass-footer">
+    <div class="footer-left">
+      <img src="assets/images/logo.jpg" class="logo">
+      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
+    <h4>Own Your Power</h4>
+      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+    </div>
+  </footer>
+</body>
+</html>

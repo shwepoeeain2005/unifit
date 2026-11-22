@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+desktop.ini
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+/Mawlamyin

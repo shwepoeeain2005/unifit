@@ -1,0 +1,304 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f0f4f8;
+  margin: 100px 0 0 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Navbar */
+nav.links {
+  background: #093864;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: 40px;
+  background: linear-gradient(90deg, #00c2ff, #66ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-icon {
+  transform: scale(1.1);
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00c2ff, #66ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Menu Container */
+nav.links ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Menu Items */
+nav.links a {
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: all 0.3s;
+  position: relative;
+  padding: 19px 15px;
+  font-size: 16px;
+}
+
+/* Hover */
+nav.links a:hover {
+  color: #ffffff;
+}
+
+/* Gradient Underline */
+nav.links a::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #5287f2, #00c2ff);
+  transition: 0.3s;
+}
+
+nav.links a:hover::after {
+  width: 100%;
+}
+
+/* Active Link */
+nav.links a.active {
+  color: #ffffff;
+}
+nav.links a.active::after {
+  width: 100%;
+}
+
+/* Content spacer */
+.content {
+  margin-top: 100px;
+  padding: 40px;
+  text-align: center;
+}
+
+/* ---------- Responsive Styles ---------- */
+
+/* Tablet */
+@media (max-width: 992px) {
+  nav.links {
+    padding: 0 30px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .logo-icon {
+    font-size: 32px;
+  }
+
+  nav.links ul {
+    gap: 15px;
+  }
+
+  nav.links a {
+    font-size: 15px;
+    padding: 18px 10px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav.links {
+    padding: 0 20px;
+  }
+
+  /* Hide menu by default */
+  nav.links ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background: #093864;
+    width: 100%;
+    padding: 20px 0;
+    gap: 10px;
+  }
+
+  nav.links ul.show {
+    display: flex;
+  }
+
+  /* Hamburger button */
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 26px;
+    color: #fff;
+  }
+
+  /* Hide on desktop */
+  .menu-toggle.hide {
+    display: none;
+  }
+}
+
+/* Extra small */
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 18px;
+  }
+  .logo-icon {
+    font-size: 26px;
+  }
+}
+
+
+.glass-footer {
+  background: #093864;
+  backdrop-filter: blur(15px);
+  color: #eee;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 25px 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  gap: 20px;
+  align-items: flex-start;
+  font-family: 'Arial', sans-serif;
+  margin-top: 150px;
+  
+}
+
+/* Footer Left: horizontal layout */
+.footer-left-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.footer-left .logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-left .footer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.diva span {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: #00c2ff;
+  margin-right: 2px;
+  font-size: 0.9rem;
+}
+
+.footer-left h4 {
+  margin: 5px 0 5px 0;
+  color: #00c2ff;
+  font-size: 1.2rem;
+}
+
+.footer-left p {
+  line-height: 1.4;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+/* Footer Right Links */
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-right a {
+  color: #eee;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.2s;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.footer-right a:hover {
+  color: #00c2ff;
+  transform: translateX(5px);
+}
+
+/* Footer Contact */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #f0f4f8;
+  font-size: 0.9rem;
+}
+
+.footer-contact a {
+  color: #eee;
+  transition: color 0.3s;
+}
+
+.footer-contact a:hover {
+  color: #00c2ff;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .glass-footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 25px 20px;
+  }
+
+  .footer-left-inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-left .footer-text {
+    align-items: center;
+  }
+
+  .footer-right,
+  .footer-contact {
+    max-width: 100%;
+    margin-top: 15px;
+  }
+}

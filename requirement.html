@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>တက္ကသိုလ်ဝင်ခွင့် လျှောက်ထားရန်လိုအပ်ချက်များ</title>
+  <meta name="description" content="တက္ကသိုလ်ဝင်ခွင့်လျှောက်ထားခြင်းနှင့် စိစစ်ရေးချယ်ခြင်းအတွက် လိုအပ်ချက်များနှင့် ဦးစားပေးလျှောက်ထားနည်းများကို ဖတ်ရှုနိုင်ပါသည်။">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <!-- Google Fonts (Myanmar Support) -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/button.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    
+
+    main {
+      flex: 1; /* pushes footer to bottom */
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      padding: 30px 20px;
+    }
+
+    .section {
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeSlideIn 1s ease forwards;
+    }
+
+    h2 {
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: #0d47a1;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    h3 {
+      font-size: clamp(18px, 2vw, 24px);
+      color: #1565c0;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: clamp(14px, 1.2vw, 16px);
+      line-height: 1.9;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+    /* nav */
+/* Base nav styling */
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  position: relative;
+  text-align: center;
+  line-height: 45px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #fff;
+}
+
+.nav-links li a.active {
+  /* yellow underline */
+  color: #006eff;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00c2ff, #66ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+
+    @keyframes fadeSlideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.3s; }
+    .section:nth-child(3) { animation-delay: 0.5s; }
+    .section:nth-child(4) { animation-delay: 0.7s; }
+    .section:nth-child(5) { animation-delay: 0.9s; }
+
+    /* Back to top button */
+    #backToTop {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: none;
+      background: #007bff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
+      z-index: 1000;
+    }
+    #backToTop:hover { background: #0056b3; transform: scale(1.1); }
+    #backToTop span { display: block; font-size: 24px; line-height: 1; position: relative; }
+    #backToTop span::before {
+      content: "";
+      position: absolute;
+      top: -6px; left: 0; right: 0;
+      margin: auto;
+      width: 16px; height: 3px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .footer-bottom {
+      width: 100%;
+      text-align: center;
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-top: 15px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  
+<nav class="links">
+  <!-- Logo -->
+  <div class="logo">
+    <i class="fas fa-graduation-cap logo-icon"></i>
+    <span class="logo-text">UniFit</span>
+  </div>
+
+  <!-- Hamburger Icon for mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="unilists.html">University Lists</a></li>
+    <li><a href="search.html">Search Your Uni</a></li>
+    <li><a href="req1.html"class="active">Requirements</a></li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+<a href="req1.html" class="home-btn">
+  <i class="fas fa-arrow-left"></i>
+</a>
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <section class="section">
+        <h2>တက္ကသိုလ်ဝင်ခွင့်လျှောက်ထားခြင်းနှင့် စိစစ်ရေးချယ်ခြင်း</h2>
+        <p>
+          ၁။ တက္ကသိုလ်ဝင်ခွင့်လျှောက်ထားကြသူများသည် အောက်ဖော်ပြပါ လျှောက်လွှာပုံစံများ၊
+          သင်တန်းရွေးချယ်မှုကတ်ပြားနှင့် တက္ကသိုလ်ဝင်ခွင့်လမ်းညွှန်စာအုပ်များကို တစ်စုံလျှင် ၁၅၀၀
+          ကျပ်နှုန်းနှင့် မိမိတို့ဖြေဆိုခဲ့သော တက္ကသိုလ်ဝင်စာမေးပွဲ စာစစ်ဌာန
+          ကြီးကြပ်ရေးမှူးများ (အထက်တန်းကျောင်းအုပ်ကြီးများ) ထံမှ ရယူနိုင်ပါသည်။
+        </p>
+        <ul>
+          <li>(၁) တက္ကသိုလ်ကျောင်းသားအဖြစ် မှတ်ပုံတင်ခွင့်လျှောက်လွှာ (၂) စုံ</li>
+          <li>(၂) တက္ကသိုလ်ဝင်ခွင့်လျှောက်လွှာ</li>
+          <li>(၃) သင်တန်းရွေးချယ်မှုကတ်ပြား</li>
+          <li>(၄) တက္ကသိုလ်ဝင်ခွင့် လမ်းညွှန်စာအုပ်</li>
+          <li>(၅) လျှောက်လွှာများထည့်ရန်စာအိတ်</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <p>
+          ၂။ တက္ကသိုလ်ဝင်ခွင့်လျှောက်လွှာများနှင့်အတူပေးပို့ရမည့် တက္ကသိုလ်ဝင်စာမေးပွဲ
+          အမှတ်စာရင်းနှင့် အရည်အချင်းမှတ်တမ်းချုပ် ရမှတ်အဆင့်တို့ကို သက်ဆိုင်ရာစာစစ်ဌာန
+          ကြီးကြပ်ရေးမှူးများ (အထက်တန်းကျောင်းအုပ်ကြီးများ) က အခမဲ့ထုတ်ပေးပါမည်။
+        </p>
+      </section>
+
+      <section class="section">
+        <p>
+          ၃။ တက္ကသိုလ်ဝင်ခွင့်အတွက် လျှောက်လွှာပုံစံများမဖြည့်သွင်းမီ ဤဝက်ဆိုဒ် (သို့)
+          တက္ကသိုလ်ဝင်ခွင့်လမ်းညွှန်စာအုပ်ကို နားလည်သဘောပေါက်အောင် ဖတ်ရှုရန်လိုအပ်သည်။
+          မရှင်းလင်းသည့်အချက်များရှိပါက မိမိတို့နှင့်နီးစပ်ရာတက္ကသိုလ်၊ ဒီဂရီကောလိပ်များမှ
+          ပါမောက္ခချုပ်များ၊ ကျောင်းအုပ်ကြီးများ၊ အထက်တန်းကျောင်းအုပ်ကြီးများနှင့်
+          ဆရာ၊ ဆရာမများထံတွင် မေးမြန်းနိုင်ပါသည်။
+        </p>
+        <ul>
+          <li>(၁) သင်တန်းရွေးချယ်မှုကတ်ပြား</li>
+          <li>(၂) တက္ကသိုလ်ကျောင်းသားအဖြစ် မှတ်ပုံတင်ခွင့်လျှောက်လွှာ</li>
+          <li>(၃) တက္ကသိုလ်ဝင်ခွင့်လျှောက်လွှာ</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h3>ဦးစားပေးလျှောက်ထားခြင်း</h3>
+        <p>
+          ၄။ တက္ကသိုလ်ဝင်စာမေးပွဲ အောင်မြင်သူများသည် မိမိတို့
+          တက္ကသိုလ်ဝင်စာမေးပွဲတွင် ဖြေဆိုခဲ့သည့် ဘာသာတွဲအလိုက် မိမိတို့
+          တက်ရောက်လိုသည့် အသက်မွေးဝမ်းကျောင်းတက္ကသိုလ်များနှင့်
+          အထူးပြုဘာသာရပ်များကို မိမိတို့ ကြိုက်နှစ်သက်သည့် ဦးစားပေးအစီအစဉ်အတိုင်း
+          လျှောက်လွှာတွင် တိကျပြည့်စုံစွာ ထည့်သွင်းဖော်ပြရမည်။
+        </p>
+      </section>
+
+      <section class="section">
+        <h3>ဦးစားပေးလျှောက်ထား ဆန္ဒပြုပုံပမာ</h3>
+        <p>
+          ၅။ ဦးစားပေးအစီအစဉ်တွင် ထည့်သွင်းဖော်ပြခြင်းမရှိသော
+          တက္ကသိုလ်၊ ဒီဂရီကောလိပ်နှင့် အထူးပြုဘာသာရပ်များကို လုံးဝစဉ်းစားမည်မဟုတ်ပါ။
+          ထို့ကြောင့် တက္ကသိုလ်ဝင်စာမေးပွဲတွင် ဖြေဆိုခဲ့သည့် ဘာသာတွဲအလိုက်
+          မိမိတို့လျှောက်ထားလိုသည့် တက္ကသိုလ်၊ ဒီဂရီကောလိပ်နှင့်
+          အထူးပြုဘာသာရပ်များကို လျှောက်ထားရန် အသိပေးအပ်ပါသည်။
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <!-- Back to top -->
+  <button id="backToTop"><span>↑</span></button>
+
+  
+
+
+
+  <script>
+
+      const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+    const btn = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+    btn.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+
+
+
+  </script>
+    <footer class="glass-footer">
+    <div class="footer-left">
+      <img src="assets/images/logo.jpg" class="logo">
+      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
+    <h4>Own Your Power</h4>
+      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+    </div>
+  </footer> 
+</body>
+</html>

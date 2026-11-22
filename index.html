@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UniFit - Your University Guide</title>
+  <link rel="stylesheet" href="assets/css/homepage.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+  <style>
+    /* Viewer Counter Styles - လှလှလေးထည့်ထားတယ် */
+    .viewer-counter-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .viewer-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      backdrop-filter: blur(10px);
+      border-radius: 80px;
+      padding: 0.8rem 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1.2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(42, 127, 110, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .viewer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 35px rgba(42, 127, 110, 0.15);
+      border-color: rgba(42, 127, 110, 0.4);
+    }
+    
+    .viewer-icon {
+      background: linear-gradient(135deg, #2a7f6e, #3ca38c);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(42, 127, 110, 0.3);
+    }
+    
+    .viewer-icon i {
+      font-size: 1.6rem;
+      color: white;
+    }
+    
+    .viewer-info {
+      text-align: left;
+    }
+    
+    .viewer-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #2a7f6e;
+      margin-bottom: 0.2rem;
+    }
+    
+    .viewer-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #1a2a3f;
+      line-height: 1;
+      font-family: 'Quicksand', monospace;
+    }
+    
+    .viewer-number small {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #6c757d;
+    }
+    
+    .viewer-badge {
+      background: #e8f3f0;
+      border-radius: 30px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #2a7f6e;
+      white-space: nowrap;
+    }
+    
+    @media (max-width: 640px) {
+      .viewer-card {
+        padding: 0.6rem 1.2rem;
+        gap: 0.8rem;
+      }
+      .viewer-icon {
+        width: 40px;
+        height: 40px;
+      }
+      .viewer-icon i {
+        font-size: 1.2rem;
+      }
+      .viewer-number {
+        font-size: 1.5rem;
+      }
+      .viewer-label {
+        font-size: 0.65rem;
+      }
+      .viewer-badge {
+        font-size: 0.6rem;
+        padding: 0.2rem 0.6rem;
+      }
+    }
+    
+    /* Animation for counter */
+    @keyframes counterPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .counter-animate {
+      animation: counterPop 0.4s ease-out;
+    }
+  </style>
+</head>
+<body>
+<nav class="links">
+  <!-- Logo -->
+  <div class="logo">
+    <i class="fas fa-graduation-cap logo-icon"></i>
+    <span class="logo-text">UniFit</span>
+  </div>
+
+  <!-- Hamburger Icon for mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="unilists.html">University Lists</a></li>
+    <li><a href="search.html">Search Your Uni</a></li>
+    <li><a href="req1.html">Requirements</a></li>
+    <li><a href="aboutus.html">About Us</a></li>
+  </ul>
+</nav>
+
+  <!-- Hero Section -->
+  <section class="wrapper">
+    <h1 class="content" class="shiny-heading">
+      <span>Welcome To <span class="UniFit">UniFit</span></span>
+      <ol>
+        <li><span>Your University Guide</span></li>
+        <li><span>Simple & Clean</span></li>
+        <li><span>Friendly & Helpful</span></li>
+        <li><span>Small Team, Big Help For Your Future</span></li>
+        <li><span>From Students, For Students</span></li>
+        <li><span>One Step Closer To The Right Campus</span></li>
+      </ol>
+    </h1>
+    <p>UniFit helps students in Myanmar find the right Technology & Computer universities in Myanmar based on their entrance exam scores.</p>
+    <p>No stress. No confusion. UniFit shows you all the right options in seconds.</p>
+    
+    
+    
+  </section>
+
+  <!-- Cards Section -->
+  <section class="overview-section">
+    <h3 class="overview">Overview</h3>
+    <div class="container">
+      <div class="card">
+        <i class="fas fa-graduation-cap"></i>
+        <p>All Unis at A Glance</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-search"></i>
+        <p>Find Your Best Match</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-user"></i>
+        <p>Ready to Apply?</p>
+      </div>
+
+      <div class="card">
+        <i class="fas fa-question-circle"></i>
+        <p>We Got You!</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Logo Carousel -->
+  <section class="tag-list">
+    <div class="inner">
+      <div class="tag"><span><img src="assets/images/UM1.webp"></span></div>
+      <div class="tag"><span><img src="assets/images/YU.png"></span></div>
+      <div class="tag"><span><img src="assets/images/MMU.png"></span></div>
+      <div class="tag"><span><img src="assets/images/YUFL.png"></span></div>
+      <div class="tag"><span><img src="assets/images/Yangon_Institute_of_Education.png"></span></div>
+      <div class="tag"><span><img src="assets/images/eco.png"></span></div>
+      <div class="tag"><span><img src="assets/images/UM2-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/Nursing,Yangon.png"></span></div>
+      <div class="tag"><span><img src="assets/images/MUFL.png"></span></div>
+      <div class="tag"><span><img src="assets/images/dentistry-removebg-preview.png"></span></div>
+
+      <div class="tag"><span><img src="assets/images/p1__1_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__2_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__3_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__4_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__5_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__6_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1 (7).jpg"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__8_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/p1__9_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/thanlin-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/hmawbi-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/uit-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/wytu-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/ytu-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/HInthadaCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/Hpa-anCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/loikaw_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/pathein_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/PatheinCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/pyay_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/PyayCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/sittwe_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/SittweCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/taunggyi_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/taungoo_tu_-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/ThatonCU_logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Kalay__logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Magway__logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Mohywa__logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Myitkyina__logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Pakokku__logo-removebg-preview.png"></span></div>
+      <div class="tag"><span><img src="assets/images/TU_Sagaing__logo-removebg-preview.png"></span></div>
+    </div>
+    <div class="fade"></div>
+  </section>
+
+  <!-- ========== VIEWER COUNTER - ကြည့်ရှုသူအရေအတွက် ========== -->
+    <div class="viewer-counter-container">
+      <div class="viewer-card" id="viewerCard">
+        <div class="viewer-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="viewer-info">
+          <div class="viewer-label">TOTAL VISITORS</div>
+          <div class="viewer-number">
+            <span id="visitCount">0</span>
+            <small></small>
+          </div>
+        </div>
+        <div class="viewer-badge">
+          <i class="fas fa-chart-line"></i> live
+        </div>
+      </div>
+    </div>
+    <!-- ========== END VIEWER COUNTER ========== -->
+  
+  <footer class="glass-footer">
+    <div class="footer-left">
+      <img src="assets/images/logo.jpg" class="logo">
+      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
+    <h4>Own Your Power</h4>
+      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+    </div>
+  </footer>
+
+    <!-- ScrollReveal Animations -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    ScrollReveal().reveal('.card', { delay: 200, interval: 200, origin: 'bottom', distance: '30px' });
+    ScrollReveal().reveal('.overview', { delay: 600, origin: 'top', distance: '40px' });
+    ScrollReveal().reveal('.wrapper p', { delay: 300, origin: 'bottom', distance: '40px' });
+    ScrollReveal().reveal('.viewer-card', { delay: 100, origin: 'bottom', distance: '20px' });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+    
+    // ========== VIEWER COUNTER FUNCTION - ကြည့်ရှုသူအရေအတွက် တိုးပေးမယ် ==========
+    (function setupVisitorCounter() {
+      const STORAGE_KEY = 'unifit_total_visitors';
+      const VISITOR_ID_KEY = 'unifit_visitor_id';
+      
+      // Get or create unique visitor ID (stored permanently)
+      let visitorId = localStorage.getItem(VISITOR_ID_KEY);
+      if (!visitorId) {
+        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem(VISITOR_ID_KEY, visitorId);
+      }
+      
+      // Check if THIS specific visitor has already been counted
+      const countedKey = 'unifit_counted_' + visitorId;
+      const alreadyCounted = localStorage.getItem(countedKey);
+      
+      let totalVisits = localStorage.getItem(STORAGE_KEY);
+      if (totalVisits === null) {
+        totalVisits = 0;
+      } else {
+        totalVisits = parseInt(totalVisits, 10);
+      }
+      
+      // Only count if this device/browser has NEVER been counted before
+      if (!alreadyCounted) {
+        totalVisits = totalVisits + 1;
+        localStorage.setItem(STORAGE_KEY, totalVisits);
+        localStorage.setItem(countedKey, 'true');  // Mark this visitor as counted FOREVER
+        
+        // Show animation
+        setTimeout(() => {
+          const counterElement = document.getElementById('visitCount');
+          if (counterElement) {
+            counterElement.classList.add('counter-animate');
+            setTimeout(() => {
+              counterElement.classList.remove('counter-animate');
+            }, 400);
+          }
+        }, 100);
+      }
+      
+      // Display count
+      const displaySpan = document.getElementById('visitCount');
+      if (displaySpan) {
+        displaySpan.innerText = totalVisits.toLocaleString();
+      }
+      
+      // Optional: Add a little greeting in console
+      console.log(`✨ UniFit has been visited ${totalVisits.toLocaleString()} times! ✨`);
+    })();
+
+    // Add hover effect to make it interactive
+    const viewerCard = document.getElementById('viewerCard');
+    if (viewerCard) {
+      viewerCard.addEventListener('mouseenter', () => {
+        const icon = viewerCard.querySelector('.viewer-icon i');
+        if (icon) {
+          icon.style.transform = 'scale(1.1)';
+          icon.style.transition = 'transform 0.2s ease';
+        }
+      });
+      viewerCard.addEventListener('mouseleave', () => {
+        const icon = viewerCard.querySelector('.viewer-icon i');
+        if (icon) {
+          icon.style.transform = 'scale(1)';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

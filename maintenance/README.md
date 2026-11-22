@@ -1,0 +1,87 @@
+# Maintaining UniFit
+
+Open `maintenance/unifit.sqlite` with a SQLite connection in DBeaver. In the current DBeaver workspace, the connection named `unifit.sqlite 2` points to this file. Check the full path in the connection settings before editing. The 2026 admissions audit is in the neighboring `2026-guide` folder.
+
+- `university_card` controls the University List cards in ID order.
+- `legacy_admission` holds the baseline rows and original search rules. The exporter applies approved changes and adds published routes from `admission_2026_review`.
+- `detail_section` holds the content shown inside each university accordion, including the Burmese descriptions and career paths. Edit `content_html` to change the displayed text.
+- `section_image` controls image paths and alt text for the existing image slots in each section. Paths are relative to the detail page.
+- `detail_page` maps the existing detail URLs to their browser data files. Each page retains its existing layout, headings and other page-specific markup.
+
+Save and commit edits in DBeaver. From the UniFit folder, regenerate the browser files and preview the site:
+
+```powershell
+Set-Location -LiteralPath 'D:\UniFit_need to fix\UniFit'
+python maintenance/export-site.py
+python maintenance/check-links.py
+```
+
+Refresh the existing preview at `http://localhost:8000/UniFit/index.html` if the server is already running from the parent folder. To start a preview from inside `UniFit`, run `python -m http.server 8000` and open `http://localhost:8000/index.html`. The JavaScript files in `data/` are generated from SQLite.
+
+## Verify the migration
+
+Run `python maintenance/check-links.py` from the UniFit folder after exporting. It checks local HTML and CSS references, search result links, card links and images, and detail image paths. It reports missing files, filename case mismatches, and links to empty pages.
+
+Run these queries in the SQLite connection:
+
+```sql
+PRAGMA integrity_check;
+PRAGMA foreign_key_check;
+SELECT COUNT(*) FROM university_card;
+SELECT COUNT(*) FROM legacy_admission;
+SELECT COUNT(*) FROM detail_page;
+SELECT COUNT(*) FROM detail_section;
+SELECT COUNT(*) FROM section_image;
+```
+
+As of 22 November 2026, these tables contain 158 baseline card rows, 802 baseline admissions rows, 166 detail-page records, 1,417 detail sections and 3,467 image references. The active export contains 155 cards and 850 search routes. The integrity check returns `ok` and the foreign-key check returns no rows.
+
+- On University List, check that cards appear, test a category button, and open Yangon's or YTU's detail page.
+- On YTU's page, expand Civil Engineering and check the Burmese description, career list and three images.
+- On Search Your Uni, select STEAMS-1 and enter 80 in all six subjects. The total should be 480. Use **More Details** to open the matching campus under `universities/` and jump to the shared admissions box or the relevant programme rules. Both the links and the Burmese requirements come from the same SQLite export.
+- The project root contains the main pages. University profiles are under `universities/`, stylesheets under `assets/css/`, images under `assets/images/`, and generated browser data under `data/`.
+
+The source snapshot is `UniFit-before-cleanup.zip` one directory above this project. Some source pages already referenced missing assets or detail files. Abbreviation search also had a JavaScript error in the baseline.
+
+## 2026 admissions
+
+Open `maintenance/unifit.sqlite` in DBeaver. Browse `admission_2026_review` for the printed guide page, score conditions, Burmese wording and publication status of each reviewed route. It links existing routes to `legacy_admission` through `legacy_id`. New routes have their own review keys. Approved changes are exported by `maintenance/export-site.py`; refresh the preview after exporting.
+
+The current export contains 155 University List cards and 850 Search Your Uni routes. Thaton's 2026 intake is unverified and its search route is withheld. The campus tracker and implementation checklist in the adjacent `2026-guide` folder list the outstanding source checks.
+
+### Find a record in DBeaver
+
+Open a SQL editor on the active connection. These read-only examples show the schema, the YTU card, its major sections and its current admissions rule:
+
+```sql
+SELECT name, sql
+FROM sqlite_schema
+WHERE type = 'table' AND name NOT LIKE 'sqlite_%'
+ORDER BY name;
+
+SELECT id, name, detail_url
+FROM university_card
+WHERE detail_url = 'universities/YTU.html';
+
+SELECT position, title
+FROM detail_section
+WHERE page_path = 'universities/YTU.html'
+ORDER BY position;
+
+SELECT review_key, university, program, printed_pages,
+       minimum_total, minimum_combined, combined_subjects,
+       stream_status, region_rule, review_status, burmese_requirements_html
+FROM admission_2026_review
+WHERE university = 'Yangon Technological University';
+```
+
+YTU's card is ID 17. Its admissions row is `legacy:690` and cites printed pages 38–41. The current rule has a combined minimum of 300 and a blank total minimum.
+
+### Apply the next approved update
+
+1. Commit or roll back any existing DBeaver edits. Disconnect before making a dated copy of `maintenance/unifit.sqlite`, then reconnect to the active file.
+2. Find the exact campus, programme and review key. Record the printed guide page or official notice in the 2026 review notes. For admissions, review the structured score, stream and region fields alongside the full Burmese text. The exporter uses the route's publication status to decide which fields and rules apply.
+3. Save the verified change in the corresponding SQLite record. For detail text, use `detail_section.content_html`. For an existing image slot, use `section_image.image_path` and keep the image under `assets/images/`. Paths in university detail sections start with `../assets/images/` because those pages live under `universities/`. Commit the edit before exporting.
+4. Run the integrity queries, export and link audit above. Refresh the preview and check the specific university in University List, Search Your Uni and its detail page. For a score rule change, try a score immediately below and at the minimum, plus any applicable stream or regional case.
+
+The active SQLite file already contains the imported data and review records. The scripts in `maintenance/migrations/` document past batch updates and assume the folder layout that existed when they ran. Routine updates to an existing reviewed record use DBeaver and `export-site.py`.

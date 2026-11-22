@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Your Uni</title>
+    <link rel="stylesheet" href="assets/css/search.css?v=2026-admissions-2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-yxz..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav class="links">
+        <div class="logo">
+            <i class="fas fa-graduation-cap logo-icon"></i>
+            <span class="logo-text">TechFit</span>
+        </div>
+
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="unilists.html">University Lists</a></li>
+            <li><a href="search.html" class="active">Search Your Uni</a></li>
+            <li><a href="req1.html">Requirements</a></li>
+            <li><a href="aboutus.html">About Us</a></li>
+        </ul>
+    </nav>
+    <h2>Searching Universities</h2>
+    <h3 class="enter-heading">Enter Your Mark (In English):</h3>
+
+    <div class="subject-set-box">
+        <label>Select Subject Set</label>
+        <div class="subject-select-box">
+            <select id="subject-set" onchange="generateSubjects()">
+                <option value="">Choose Your Subject Set</option>
+                <option value="STEAMS1">STEAMS 1</option>
+                <option value="STEAMS2">STEAMS 2</option>
+                <option value="STAMS1">STAMS 1</option>
+                <option value="STAMS2">STAMS 2</option>
+            </select>
+        </div>
+
+        <div id="generated-subjects" class="subject-grid"></div>
+
+        <div class="clear-button">
+            <button class="icon-clear-btn" onclick="clearForm()">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="center-container">
+        <div class="place-box">
+            <label>Choose Test Center</label>
+            <select id="division-select">
+                <option value="npt" id="npt">Naypyitaw</option>
+                <option value="kcn" id="kcn">Kachin</option>
+                <option value="kyh" id="kyh">Kayah</option>
+                <option value="kyn" id="kyn">Kayin</option>
+                <option value="chn" id="chn">Chin</option>
+                <option value="sgg" id="sgg">Sagaing</option>
+                <option value="tni" id="tni">Taninthayi</option>
+                <option value="bgo" id="bgo">Bago</option>
+                <option value="mgy" id="mgy">Magway</option>
+                <option value="mdy" id="mdy">Mandalay</option>
+                <option value="mon" id="mon">Mon</option>
+                <option value="rke" id="rke">Rakhine</option>
+                <option value="ygn" id="ygn">Yangon</option>
+                <option value="east" id="east">Shan (East)</option>
+                <option value="north" id="north">Shan (North)</option>
+                <option value="south" id="south">Shan (South)</option>
+                <option value="ayy" id="ayy">Ayeyarwady</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="btn-row">
+        <button class="search-btn" onclick="searchUniversities()">Search Universities</button>
+    </div>
+
+    <div id="total-box" class="total-box" style="display:none;">
+        Total Marks: <span id="total-score">0</span>
+    </div>
+
+    <div id="results"></div>
+    <div id="loading-spinner" style="display:none;">
+        <div class="spinner"></div>
+        <p>Checking your results…</p>
+    </div>
+
+    <button id="backToTop">
+        <span>↑</span>
+    </button>
+
+    
+<script src="data/admissions.js?v=2026-admissions-2"></script>
+<script src="assets/js/admission-search.js?v=2026-admissions-2"></script>
+
+    <footer class="glass-footer">
+        <div class="footer-left">
+            <img src="assets/images/logo.jpg" class="logo">
+            <div class="diva"><span>
+                    << /span><span>div</span><span>></span><span>
+                            << /span><span>a</span><span>></span></div>
+            <h4>Own Your Power</h4>
+            <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with
+                confidence and purpose.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

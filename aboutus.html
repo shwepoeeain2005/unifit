@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="assets/css/aboutus.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-yxz..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav class="links">
+  <!-- Logo -->
+  <div class="logo">
+    <i class="fas fa-graduation-cap logo-icon"></i>
+    <span class="logo-text">UniFit</span>
+  </div>
+
+  <!-- Hamburger Icon for mobile -->
+  <div class="hamburger" id="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" >Home</a></li>
+    <li><a href="unilists.html">University Lists</a></li>
+    <li><a href="search.html">Search Your Uni</a></li>
+    <li><a href="req1.html">Requirements</a></li>
+    <li><a href="aboutus.html"class="active">About Us</a></li>
+  </ul>
+</nav>
+
+  <!-- Heading -->
+  <h2>Meet Our Team</h2>
+
+  <!-- Team Members -->
+  <div class="team-container">
+    <!-- Member 1 -->
+    <div class="member-card">
+      <img src="assets/images/thant.jpg" class="member-image" alt="Thant Thadar">
+      <div class="member-name">Thant Thadar</div>
+      <div class="member-tnt">TNT-2427</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+
+    <!-- Member 2 -->
+    <div class="member-card">
+      <img src="assets/images/poe.jpg" class="member-image" alt="Shwe Poe Eain">
+      <div class="member-name">Shwe Poe Eain</div>
+      <div class="member-tnt">TNT-2402</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+
+    <!-- Member 3 -->
+    <div class="member-card">
+      <img src="assets/images/chan.jpg" class="member-image" alt="Aye Chan Khin">
+      <div class="member-name">Aye Chan Khin</div>
+      <div class="member-tnt">TNT-2333</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+
+    <!-- Member 4 -->
+    <div class="member-card">
+      <img src="assets/images/mon.jpg" class="member-image" alt="Aye Mon Thet">
+      <div class="member-name">Aye Mon Thet</div>
+      <div class="member-tnt">TNT-2339</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+
+    <!-- Member 5 -->
+    <div class="member-card">
+      <img src="assets/images/chaw.jpg" class="member-image" alt="Chaw Yadana Khin">
+      <div class="member-name">Chaw Yadana Khin</div>
+      <div class="member-tnt">TNT-2422</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+
+    <!-- Member 6 -->
+    <div class="member-card">
+      <img src="assets/images/zin.jpg" class="member-image" alt="Ei Kay Zin Aung">
+      <div class="member-name">Ei Kay Zin Aung</div>
+      <div class="member-tnt">TNT-2370</div>
+      <div class="member-role">First Year, Semester II</div>
+      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
+    </div>
+  </div>
+
+  <!-- Aim Section -->
+  <div class="aim-section">
+    <h2 class="aim-heading">Our Aim</h2>
+    <div>
+      <p>
+        “As former Grade 12 students ourselves, we understand the challenges and dreams of those just beginning their
+        journey.
+        That is why, as project members, we have created this website—so today’s freshers can enjoy an incredible
+        platform
+        designed to guide, inspire, and support them. With our effort, we made it easy for students to calculate and
+        check
+        their total marks which technological universities will fit in just a second, simply by adding and searching
+        their scores.
+        Everything has been built with one goal in mind: to make learning smoother and easier for freshers.”
+      </p>
+    </div>
+  </div>
+  <footer class="glass-footer">
+    <div class="footer-left">
+      <img src="assets/images/logo.jpg" class="logo">
+      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
+    <h4>Own Your Power</h4>
+      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+    </div>
+  </footer>
+</body>
+<script>
+   const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+</script>
+
+</html>
