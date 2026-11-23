@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "node maintenance/build-public.mjs",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/chat.py": {
+      "includeFiles": "maintenance/{chat_server.py,chat_lookup.py,chat_model.py,unifit.sqlite}",
+      "excludeFiles": "{assets/**,data/**,universities/**,dist/**,**/.env*}"
+    }
+  }
+}

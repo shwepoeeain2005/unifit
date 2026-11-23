@@ -117,3 +117,21 @@ outside Git and the browser. Optionally set `UNIFIT_OPENAI_MODEL` to an accessib
 that supports Responses API structured outputs. The default is `gpt-4.1-mini`.
 In hosted-model mode, the server sends the question, recent conversation and relevant
 reviewed records to OpenAI. The API request disables response storage.
+
+## Vercel deployment
+
+Import the UniFit repository into Vercel with the repository root as the project root.
+The checked-in configuration builds the public HTML and assets into `dist` and serves
+`POST /api/chat` as a Python Function. The function reads the bundled SQLite database
+in read-only mode. Keep the build command and output directory from `vercel.json`.
+
+1. Create a Preview deployment. In the Vercel project environment variables, add
+   `GEMINI_API_KEY` for Preview as a sensitive variable. Set `UNIFIT_GEMINI_MODEL` only
+   if you need to override the default. Enter the key directly in Vercel and redeploy.
+2. In Preview, check a reviewed lookup such as “What does page 149 say?” and a
+   conversational question that reaches Gemini. Check the function logs for any
+   provider errors. A local lookup reply can succeed without a configured Gemini key.
+3. Verify that the preview returns 404 for `/.env` and `/maintenance/unifit.sqlite`.
+   Before sharing the public URL, configure a POST rate limit for `/api/chat` using
+   the Vercel project's firewall and check the Gemini project's usage limits.
+4. Add the key to the Production environment and deploy after Preview checks pass.

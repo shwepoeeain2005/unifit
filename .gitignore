@@ -6,3 +6,6 @@ desktop.ini
 *.sqlite-wal
 /Mawlamyin
 .env
+.env.*
+.vercel/
+/dist/
