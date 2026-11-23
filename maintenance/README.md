@@ -4,19 +4,31 @@ Open `maintenance/unifit.sqlite` with a SQLite connection in DBeaver. In the cur
 
 - `university_card` controls the University List cards in ID order.
 - `legacy_admission` holds the baseline rows and original search rules. The exporter applies approved changes and adds published routes from `admission_2026_review`.
-- `detail_section` holds the content shown inside each university accordion, including the Burmese descriptions and career paths. Edit `content_html` to change the displayed text.
+- `detail_section` holds the content shown inside each university accordion, including the Burmese descriptions and career paths. Edit `title` for the accordion heading and `content_html` for the body text. Profile pages render majors from this table at export/runtime.
 - `section_image` controls image paths and alt text for the existing image slots in each section. Paths are relative to the detail page.
 - `detail_page` maps the existing detail URLs to their browser data files. Each page retains its existing layout, headings and other page-specific markup.
 
 Save and commit edits in DBeaver. From the UniFit folder, regenerate the browser files and preview the site:
 
 ```powershell
-Set-Location -LiteralPath 'D:\UniFit_need to fix\UniFit'
+Set-Location -LiteralPath 'D:\UNIFit\unifit'
+python maintenance/export-site.py
+python maintenance/check-links.py
+node maintenance/test_admission_rules.mjs
+```
+
+CI runs the same three commands on every push via `.github/workflows/site-checks.yml`.
+
+To recompress raster assets (JPG/PNG → WebP when smaller, max edge 1600px):
+
+```powershell
+python maintenance/optimize_images.py
 python maintenance/export-site.py
 python maintenance/check-links.py
 ```
 
-Refresh the existing preview at `http://localhost:8000/UniFit/index.html` if the server is already running from the parent folder. To start a preview from inside `UniFit`, run `python -m http.server 8000` and open `http://localhost:8000/index.html`. The JavaScript files in `data/` are generated from SQLite.
+
+To preview from inside `unifit`, run `python -m http.server 8082 --bind 127.0.0.1` and open `http://127.0.0.1:8082/index.html`. The JavaScript files in `data/` are generated from SQLite. `data/admissions.js` stores a compact packed payload and expands it to `window.unifitAdmissions` in the browser. University profile URLs use kebab-case slugs; old spaced filenames remain as redirect stubs.
 
 ## Verify the migration
 

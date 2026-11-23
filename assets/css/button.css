@@ -1,7 +1,7 @@
 /* Back Button */
 .home-btn {
   position: fixed;
-  top: 105px;
+  top: calc(var(--nav-height, 78px) + 12px);
   left: 15px;
   background: #0d47a1;
   color: white;

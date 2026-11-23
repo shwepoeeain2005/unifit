@@ -1,31 +1,41 @@
+@import url("tokens.css?v=page-bg-1");
+
 .university-admissions {
   box-sizing: border-box;
-  width: calc(100% - 2rem);
-  max-width: 1100px;
-  margin: 1.25rem auto 2rem;
-  padding: clamp(1rem, 3vw, 1.75rem);
-  border: 1px solid #c8d3e4;
-  border-radius: 12px;
-  background: #fff;
-  color: #20334e;
-  line-height: 1.7;
+  width: min(100% - 2.5rem, 1120px);
+  margin: 1.5rem auto 2rem;
+  padding: clamp(1.15rem, 3vw, 1.85rem);
+  border: 1px solid rgba(25, 52, 95, 0.1);
+  border-radius: 20px;
+  background: #ffffff;
+  color: #19345f;
+  line-height: 1.75;
   text-align: left;
+  box-shadow: 0 10px 28px rgba(25, 52, 95, 0.08);
 }
 
 .university-admissions h2,
 .university-admissions h3 {
-  margin: 0 0 0.5rem;
-  color: #174595;
+  margin: 0 0 0.55rem;
+  color: #19345f;
+  font-family: "Quicksand", "Noto Sans Myanmar", "Segoe UI", sans-serif;
+}
+
+.university-admissions h2 {
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  border-bottom: 3px solid #ffe34f;
+  font-size: clamp(1.25rem, 2.4vw, 1.55rem);
 }
 
 .university-admissions p {
-  margin: 0.4rem 0;
+  margin: 0.45rem 0;
 }
 
 .programme-requirements {
   margin-top: 1rem;
-  padding: 0.75rem 0.5rem 0;
-  border-top: 1px solid #dce4f0;
+  padding: 0.85rem 0.15rem 0;
+  border-top: 1px solid rgba(25, 52, 95, 0.1);
 }
 
 .university-admissions,
@@ -34,6 +44,20 @@
 }
 
 .programme-requirements:target {
-  background: #edf4ff;
-  border-radius: 6px;
+  background: rgba(255, 227, 79, 0.18);
+  border-radius: 12px;
+  padding-inline: 0.65rem;
+}
+
+.unverified-note {
+  background: rgba(255, 227, 79, 0.28);
+  border-left: 4px solid #ffe34f;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+
+@media (max-width: 720px) {
+  .university-admissions {
+    width: min(100% - 1.5rem, 1120px);
+  }
 }

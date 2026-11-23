@@ -4,364 +4,236 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UniFit - Your University Guide</title>
-  <link rel="stylesheet" href="assets/css/homepage.css">
-  <link rel="stylesheet" href="assets/css/nav.css">
-
-  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="assets/css/university-card.css?v=polish-1">
+  <link rel="stylesheet" href="assets/css/homepage.css?v=polish-1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  
-  <style>
-    /* Viewer Counter Styles - လှလှလေးထည့်ထားတယ် */
-    .viewer-counter-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    
-    .viewer-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      backdrop-filter: blur(10px);
-      border-radius: 80px;
-      padding: 0.8rem 2rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 1.2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(42, 127, 110, 0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .viewer-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 35px rgba(42, 127, 110, 0.15);
-      border-color: rgba(42, 127, 110, 0.4);
-    }
-    
-    .viewer-icon {
-      background: linear-gradient(135deg, #2a7f6e, #3ca38c);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(42, 127, 110, 0.3);
-    }
-    
-    .viewer-icon i {
-      font-size: 1.6rem;
-      color: white;
-    }
-    
-    .viewer-info {
-      text-align: left;
-    }
-    
-    .viewer-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #2a7f6e;
-      margin-bottom: 0.2rem;
-    }
-    
-    .viewer-number {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #1a2a3f;
-      line-height: 1;
-      font-family: 'Quicksand', monospace;
-    }
-    
-    .viewer-number small {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #6c757d;
-    }
-    
-    .viewer-badge {
-      background: #e8f3f0;
-      border-radius: 30px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      color: #2a7f6e;
-      white-space: nowrap;
-    }
-    
-    @media (max-width: 640px) {
-      .viewer-card {
-        padding: 0.6rem 1.2rem;
-        gap: 0.8rem;
-      }
-      .viewer-icon {
-        width: 40px;
-        height: 40px;
-      }
-      .viewer-icon i {
-        font-size: 1.2rem;
-      }
-      .viewer-number {
-        font-size: 1.5rem;
-      }
-      .viewer-label {
-        font-size: 0.65rem;
-      }
-      .viewer-badge {
-        font-size: 0.6rem;
-        padding: 0.2rem 0.6rem;
-      }
-    }
-    
-    /* Animation for counter */
-    @keyframes counterPop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    
-    .counter-animate {
-      animation: counterPop 0.4s ease-out;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="assets/css/nav.css?v=nav-box-1">
 </head>
 <body>
-<nav class="links">
-  <!-- Logo -->
-  <div class="logo">
-    <i class="fas fa-graduation-cap logo-icon"></i>
-    <span class="logo-text">UniFit</span>
-  </div>
-
-  <!-- Hamburger Icon for mobile -->
-  <div class="hamburger" id="hamburger">
-    <i class="fas fa-bars"></i>
-  </div>
-
-  <!-- Navigation Links -->
+<header>
+<nav class="links" aria-label="Primary">
+  <a class="logo" href="index.html" aria-label="UniFit home">
+    <i class="fas fa-graduation-cap logo-icon" aria-hidden="true"></i>
+    <span class="logo-text"><span class="logo-uni">Uni</span><span class="logo-fit">Fit</span></span>
+  </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="unilists.html">University Lists</a></li>
-    <li><a href="search.html">Search Your Uni</a></li>
     <li><a href="req1.html">Requirements</a></li>
     <li><a href="aboutus.html">About Us</a></li>
+    <li class="nav-mobile-cta">
+      <a class="nav-cta" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
+    </li>
   </ul>
+  <div class="nav-actions">
+    <a class="nav-cta nav-cta-desktop" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
+  </div>
 </nav>
+</header>
 
-  <!-- Hero Section -->
-  <section class="wrapper">
-    <h1 class="content" class="shiny-heading">
-      <span>Welcome To <span class="UniFit">UniFit</span></span>
-      <ol>
-        <li><span>Your University Guide</span></li>
-        <li><span>Simple & Clean</span></li>
-        <li><span>Friendly & Helpful</span></li>
-        <li><span>Small Team, Big Help For Your Future</span></li>
-        <li><span>From Students, For Students</span></li>
-        <li><span>One Step Closer To The Right Campus</span></li>
-      </ol>
-    </h1>
-    <p>UniFit helps students in Myanmar find the right Technology & Computer universities in Myanmar based on their entrance exam scores.</p>
-    <p>No stress. No confusion. UniFit shows you all the right options in seconds.</p>
-    
-    
-    
-  </section>
-
-  <!-- Cards Section -->
-  <section class="overview-section">
-    <h3 class="overview">Overview</h3>
-    <div class="container">
-      <div class="card">
-        <i class="fas fa-graduation-cap"></i>
-        <p>All Unis at A Glance</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-search"></i>
-        <p>Find Your Best Match</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-user"></i>
-        <p>Ready to Apply?</p>
-      </div>
-
-      <div class="card">
-        <i class="fas fa-question-circle"></i>
-        <p>We Got You!</p>
-      </div>
-    </div>
-    
-  </section>
-
-  <!-- Logo Carousel -->
-  <section class="tag-list">
-    <div class="inner">
-      <div class="tag"><span><img src="assets/images/UM1.webp"></span></div>
-      <div class="tag"><span><img src="assets/images/YU.png"></span></div>
-      <div class="tag"><span><img src="assets/images/MMU.png"></span></div>
-      <div class="tag"><span><img src="assets/images/YUFL.png"></span></div>
-      <div class="tag"><span><img src="assets/images/Yangon_Institute_of_Education.png"></span></div>
-      <div class="tag"><span><img src="assets/images/eco.png"></span></div>
-      <div class="tag"><span><img src="assets/images/UM2-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/Nursing,Yangon.png"></span></div>
-      <div class="tag"><span><img src="assets/images/MUFL.png"></span></div>
-      <div class="tag"><span><img src="assets/images/dentistry-removebg-preview.png"></span></div>
-
-      <div class="tag"><span><img src="assets/images/p1__1_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__2_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__3_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__4_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__5_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__6_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1 (7).jpg"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__8_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/p1__9_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/thanlin-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/hmawbi-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/uit-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/wytu-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/ytu-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/HInthadaCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/Hpa-anCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/loikaw_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/pathein_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/PatheinCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/pyay_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/PyayCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/sittwe_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/SittweCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/taunggyi_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/taungoo_tu_-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/ThatonCU_logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Kalay__logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Magway__logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Mohywa__logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Myitkyina__logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Pakokku__logo-removebg-preview.png"></span></div>
-      <div class="tag"><span><img src="assets/images/TU_Sagaing__logo-removebg-preview.png"></span></div>
-    </div>
-    <div class="fade"></div>
-  </section>
-
-  <!-- ========== VIEWER COUNTER - ကြည့်ရှုသူအရေအတွက် ========== -->
-    <div class="viewer-counter-container">
-      <div class="viewer-card" id="viewerCard">
-        <div class="viewer-icon">
-          <i class="fas fa-eye"></i>
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid page-shell">
+      <div class="hero-copy">
+        <p class="eyebrow hero-enter" data-enter="1">From students, for students</p>
+        <h1 id="hero-title" class="hero-title hero-enter" data-enter="2">
+          <span class="hero-title-static">Find the right</span>
+          <span class="hero-rotate-wrap" aria-live="polite">
+            <span class="hero-rotate-text" id="hero-rotate-text">University for you.</span>
+          </span>
+        </h1>
+        <p class="hero-lead hero-enter" data-enter="3">
+          UniFit helps you explore campuses and match your matriculation marks with published 2026 admission requirements — clearly, quickly, and without the stress.
+        </p>
+        <div class="hero-actions hero-enter" data-enter="4">
+          <a class="btn btn-primary" href="search.html">Find My University</a>
+          <a class="btn btn-secondary hero-enter-child" href="unilists.html">Explore Universities</a>
         </div>
-        <div class="viewer-info">
-          <div class="viewer-label">TOTAL VISITORS</div>
-          <div class="viewer-number">
-            <span id="visitCount">0</span>
-            <small></small>
+      </div>
+      <div class="hero-visual hero-enter" data-enter="3" aria-hidden="true">
+        <div class="hero-illustration">
+          <div class="hero-orb hero-orb-a"></div>
+          <div class="hero-orb hero-orb-b"></div>
+          <div class="hero-panel">
+            <div class="hero-badge"><i class="fas fa-graduation-cap"></i></div>
+            <div class="hero-campus-art">
+              <span class="tower"></span>
+              <span class="block block-a"></span>
+              <span class="block block-b"></span>
+              <span class="lawn"></span>
+            </div>
+            <p><span class="stat-count" data-count="150">0</span>+ campuses</p>
+            <small>Marks · Majors · Requirements</small>
           </div>
-        </div>
-        <div class="viewer-badge">
-          <i class="fas fa-chart-line"></i> live
+          <div class="hero-chip hero-chip-1"><i class="fas fa-magnifying-glass"></i> Match by marks</div>
+          <div class="hero-chip hero-chip-2"><i class="fas fa-book-open"></i> 2026 guide ready</div>
         </div>
       </div>
     </div>
-    <!-- ========== END VIEWER COUNTER ========== -->
-  
-  <footer class="glass-footer">
-    <div class="footer-left">
-      <img src="assets/images/logo.jpg" class="logo">
-      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
-    <h4>Own Your Power</h4>
-      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+  </section>
+
+  <section class="section overview-section" aria-labelledby="overview-title">
+    <div class="page-shell">
+      <div class="section-heading">
+        <h2 id="overview-title">Overview</h2>
+        <p>Everything you need to compare campuses and plan your next step.</p>
+      </div>
+      <div class="overview-grid">
+        <a class="overview-card" href="unilists.html">
+          <span class="icon-wrap"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span>
+          <h3>All Unis at a Glance</h3>
+          <p>Browse Myanmar universities and colleges with clear campus profiles.</p>
+        </a>
+        <a class="overview-card" href="search.html">
+          <span class="icon-wrap"><i class="fas fa-magnifying-glass" aria-hidden="true"></i></span>
+          <h3>Find Your Best Match</h3>
+          <p>Enter your marks and subject set to see matching admission routes.</p>
+        </a>
+        <a class="overview-card" href="req1.html">
+          <span class="icon-wrap"><i class="fas fa-clipboard-check" aria-hidden="true"></i></span>
+          <h3>Ready to Apply?</h3>
+          <p>Review published requirements before you shortlist a campus.</p>
+        </a>
+        <a class="overview-card" href="aboutus.html">
+          <span class="icon-wrap"><i class="fas fa-handshake" aria-hidden="true"></i></span>
+          <h3>We Got You</h3>
+          <p>Built by students to make university choices clearer for everyone.</p>
+        </a>
+      </div>
     </div>
-  </footer>
+  </section>
 
-    <!-- ScrollReveal Animations -->
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    ScrollReveal().reveal('.card', { delay: 200, interval: 200, origin: 'bottom', distance: '30px' });
-    ScrollReveal().reveal('.overview', { delay: 600, origin: 'top', distance: '40px' });
-    ScrollReveal().reveal('.wrapper p', { delay: 300, origin: 'bottom', distance: '40px' });
-    ScrollReveal().reveal('.viewer-card', { delay: 100, origin: 'bottom', distance: '20px' });
+  <section class="section categories-section" aria-labelledby="categories-title">
+    <div class="page-shell">
+      <div class="section-heading">
+        <h2 id="categories-title">Explore University Categories</h2>
+        <p>Start with the campus types students search most often.</p>
+      </div>
+      <div class="category-grid">
+        <a class="category-card" href="unilists.html?category=tu">
+          <span class="category-kicker">TU</span>
+          <h3>Technological Universities</h3>
+          <p>Engineering-focused campuses across Myanmar.</p>
+        </a>
+        <a class="category-card" href="unilists.html?category=cu">
+          <span class="category-kicker">CU</span>
+          <h3>Computer Universities</h3>
+          <p>Computing, IT, and related technology programmes.</p>
+        </a>
+        <a class="category-card" href="unilists.html?category=pu">
+          <span class="category-kicker">PU</span>
+          <h3>Polytechnic Universities</h3>
+          <p>Regional polytechnic routes with practical pathways.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
+  <section class="section steps-section" aria-labelledby="steps-title">
+    <div class="page-shell">
+      <div class="section-heading">
+        <h2 id="steps-title">How UniFit Works</h2>
+        <p>Three simple steps from marks to campus matches.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-number">1</span>
+          <h3>Enter Marks</h3>
+          <p>Add your matriculation subject scores between 40 and 100.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">2</span>
+          <h3>Select Subjects</h3>
+          <p>Choose your subject set and exam center for accurate filtering.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">3</span>
+          <h3>Find Universities</h3>
+          <p>See matching programmes and open campus details instantly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-    
-    // ========== VIEWER COUNTER FUNCTION - ကြည့်ရှုသူအရေအတွက် တိုးပေးမယ် ==========
-    (function setupVisitorCounter() {
-      const STORAGE_KEY = 'unifit_total_visitors';
-      const VISITOR_ID_KEY = 'unifit_visitor_id';
-      
-      // Get or create unique visitor ID (stored permanently)
-      let visitorId = localStorage.getItem(VISITOR_ID_KEY);
-      if (!visitorId) {
-        visitorId = 'visitor_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem(VISITOR_ID_KEY, visitorId);
-      }
-      
-      // Check if THIS specific visitor has already been counted
-      const countedKey = 'unifit_counted_' + visitorId;
-      const alreadyCounted = localStorage.getItem(countedKey);
-      
-      let totalVisits = localStorage.getItem(STORAGE_KEY);
-      if (totalVisits === null) {
-        totalVisits = 0;
-      } else {
-        totalVisits = parseInt(totalVisits, 10);
-      }
-      
-      // Only count if this device/browser has NEVER been counted before
-      if (!alreadyCounted) {
-        totalVisits = totalVisits + 1;
-        localStorage.setItem(STORAGE_KEY, totalVisits);
-        localStorage.setItem(countedKey, 'true');  // Mark this visitor as counted FOREVER
-        
-        // Show animation
-        setTimeout(() => {
-          const counterElement = document.getElementById('visitCount');
-          if (counterElement) {
-            counterElement.classList.add('counter-animate');
-            setTimeout(() => {
-              counterElement.classList.remove('counter-animate');
-            }, 400);
-          }
-        }, 100);
-      }
-      
-      // Display count
-      const displaySpan = document.getElementById('visitCount');
-      if (displaySpan) {
-        displaySpan.innerText = totalVisits.toLocaleString();
-      }
-      
-      // Optional: Add a little greeting in console
-      console.log(`✨ UniFit has been visited ${totalVisits.toLocaleString()} times! ✨`);
-    })();
+  <section class="section featured-section" aria-labelledby="featured-title">
+    <div class="page-shell">
+      <div class="section-heading">
+        <h2 id="featured-title">Featured Universities</h2>
+        <p>A quick look at well-known campuses already in UniFit.</p>
+      </div>
+      <div class="featured-grid uni-card-grid" id="featured-grid"></div>
+      <div class="section-cta-row">
+        <a class="btn btn-secondary" href="unilists.html">See all universities</a>
+      </div>
+    </div>
+  </section>
 
-    // Add hover effect to make it interactive
-    const viewerCard = document.getElementById('viewerCard');
-    if (viewerCard) {
-      viewerCard.addEventListener('mouseenter', () => {
-        const icon = viewerCard.querySelector('.viewer-icon i');
-        if (icon) {
-          icon.style.transform = 'scale(1.1)';
-          icon.style.transition = 'transform 0.2s ease';
-        }
-      });
-      viewerCard.addEventListener('mouseleave', () => {
-        const icon = viewerCard.querySelector('.viewer-icon i');
-        if (icon) {
-          icon.style.transform = 'scale(1)';
-        }
-      });
-    }
-  </script>
+  <section class="final-cta" aria-labelledby="final-cta-title">
+    <div class="page-shell final-cta-panel">
+      <div>
+        <h2 id="final-cta-title">Your Future Starts Here</h2>
+        <p>Match your marks with published 2026 admission routes and take the next step with clarity.</p>
+      </div>
+      <a class="btn btn-primary" href="search.html">Find Your University</a>
+    </div>
+  </section>
+
+  <section class="campus-ribbon campus-ribbon-bottom" aria-hidden="true">
+    <div class="campus-ribbon-glow"></div>
+    <div class="campus-ribbon-fade campus-ribbon-fade-left"></div>
+    <div class="campus-ribbon-fade campus-ribbon-fade-right"></div>
+    <div class="campus-ribbon-rows" id="logo-carousel">
+      <div class="campus-ribbon-row">
+        <div class="campus-ribbon-track" id="logo-track"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="page-shell footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+        <strong>UniFit</strong>
+      </div>
+      <p>A student-built guide to Myanmar universities, majors, and published admission requirements.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="unilists.html">University Lists</a></li>
+        <li><a href="search.html">Search Your Uni</a></li>
+        <li><a href="req1.html">Requirements</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Project</h3>
+      <ul>
+        <li>2026 admissions guide support</li>
+        <li>Static, privacy-friendly mark matching</li>
+        <li>From students, for students</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="page-shell">
+      <p>© UniFit · Own Your Power</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="data/universities.js"></script>
+<script src="assets/js/nav.js?v=polish-1"></script>
+<script src="assets/js/category-labels.js?v=polish-1"></script>
+<script src="assets/js/homepage.js?v=polish-1"></script>
 </body>
 </html>

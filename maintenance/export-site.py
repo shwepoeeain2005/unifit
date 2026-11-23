@@ -22,6 +22,89 @@ def write_script(path, name, value, trailing_script=""):
     path.write_text(f"window.{name} = {data};\n{trailing_script}", encoding="utf-8")
 
 
+def pack_admissions(admissions):
+    """Deduplicate repeated subject lists and detail page URLs for a smaller download."""
+    pages = []
+    page_index = {}
+    subjects = []
+    subject_index = {}
+    routes = []
+    for entry in admissions:
+        page, _, fragment = entry["detailUrl"].partition("#")
+        if page not in page_index:
+            page_index[page] = len(pages)
+            pages.append(page)
+        subject_key = json.dumps(entry.get("requiredSubjects"), ensure_ascii=False, separators=(",", ":"))
+        if subject_key not in subject_index:
+            subject_index[subject_key] = len(subjects)
+            subjects.append(entry.get("requiredSubjects"))
+        route = {
+            "n": entry["name"],
+            "u": page_index[page],
+            "h": fragment,
+            "r": subject_index[subject_key],
+        }
+        if entry.get("group") is not None:
+            route["g"] = entry["group"]
+        if entry.get("requiredTotal") is not None:
+            route["t"] = entry["requiredTotal"]
+        if entry.get("subjectSpecific"):
+            route["s"] = entry["subjectSpecific"]
+        if entry.get("allowedCenters") is not None:
+            route["c"] = entry["allowedCenters"]
+        if entry.get("totalOrMathEnglish"):
+            route["o"] = True
+        if entry.get("confirmExamStream"):
+            route["x"] = True
+        routes.append(route)
+    return {"pages": pages, "subjects": subjects, "routes": routes}
+
+
+ADMISSIONS_EXPAND = """window.unifitAdmissions = (window.unifitAdmissionsPacked.routes || []).map(function (route) {
+  var entry = {
+    name: route.n,
+    detailUrl: window.unifitAdmissionsPacked.pages[route.u] + (route.h ? "#" + route.h : ""),
+    requiredSubjects: window.unifitAdmissionsPacked.subjects[route.r]
+  };
+  if (route.g !== undefined) entry.group = route.g;
+  if (route.t !== undefined) entry.requiredTotal = route.t;
+  if (route.s !== undefined) entry.subjectSpecific = route.s;
+  if (route.c !== undefined) entry.allowedCenters = route.c;
+  if (route.o) entry.totalOrMathEnglish = true;
+  if (route.x) entry.confirmExamStream = true;
+  return entry;
+});
+"""
+
+
+def write_admissions_script(path, admissions):
+    write_script(path, "unifitAdmissionsPacked", pack_admissions(admissions), ADMISSIONS_EXPAND)
+
+
+def unpack_admissions(packed):
+    routes = []
+    for route in packed["routes"]:
+        entry = {
+            "name": route["n"],
+            "detailUrl": packed["pages"][route["u"]] + (f"#{route['h']}" if route.get("h") else ""),
+            "requiredSubjects": packed["subjects"][route["r"]],
+        }
+        if "g" in route:
+            entry["group"] = route["g"]
+        if "t" in route:
+            entry["requiredTotal"] = route["t"]
+        if "s" in route:
+            entry["subjectSpecific"] = route["s"]
+        if "c" in route:
+            entry["allowedCenters"] = route["c"]
+        if route.get("o"):
+            entry["totalOrMathEnglish"] = True
+        if route.get("x"):
+            entry["confirmExamStream"] = True
+        routes.append(entry)
+    return routes
+
+
 def admission_sections(admissions, cards):
     by_page = {card["detail_url"]: [] for card in cards}
     for entry in admissions:
@@ -232,21 +315,50 @@ def export_site(root):
         missing_pages = requirements.keys() - {path for path, _ in pages}
         if missing_pages:
             raise ValueError(f"Admission boxes need detail data for: {', '.join(sorted(missing_pages))}")
-        write_script(root / "data" / "admissions.js", "unifitAdmissions", admissions)
+        write_admissions_script(root / "data" / "admissions.js", admissions)
+
+        unverified = [
+            dict(university=row["university"], program=row["program"], status=row["review_status"])
+            for row in db.execute(
+                """
+                SELECT university, program, review_status
+                FROM admission_2026_review
+                WHERE review_status LIKE '%withheld%' OR review_status LIKE '%unverified%'
+                ORDER BY university, program
+                """
+            )
+        ]
+        write_script(root / "data" / "unverified.js", "unifitUnverified", unverified)
+
+        card_by_url = {card["detail_url"]: card for card in cards}
         for page_path, export_key in pages:
             sections = []
-            for section_id, content in db.execute(
-                "SELECT id, content_html FROM detail_section WHERE page_path = ? ORDER BY position",
+            for section_id, title, content in db.execute(
+                "SELECT id, title, content_html FROM detail_section WHERE page_path = ? ORDER BY position",
                 (page_path,),
             ):
                 images = [dict(row) for row in db.execute(
                     "SELECT image_path, alt_text FROM section_image WHERE section_id = ? ORDER BY position",
                     (section_id,),
                 )]
-                sections.append({"html": content, "images": images})
-            write_script(root / "data" / "details" / f"{export_key}.js", "unifitDetail",
-                         {"sections": sections, "admissions": requirements.get(page_path)},
-                         "window.unifitSections = window.unifitDetail.sections;\n")
+                sections.append({"title": title, "html": content, "images": images})
+            card = card_by_url.get(page_path)
+            campus = None
+            if card:
+                campus = {"name": card["name"], "address": card["address"]}
+            else:
+                poly = db.execute(
+                    "SELECT university, location FROM regional_polytechnic_campus WHERE detail_url = ?",
+                    (page_path,),
+                ).fetchone()
+                if poly:
+                    campus = {"name": poly["university"], "address": poly["location"]}
+            write_script(
+                root / "data" / "details" / f"{export_key}.js",
+                "unifitDetail",
+                {"campus": campus, "sections": sections, "admissions": requirements.get(page_path)},
+                "window.unifitSections = window.unifitDetail.sections;\n",
+            )
 
 
 if __name__ == "__main__":

@@ -8,7 +8,6 @@ import re
 import sqlite3
 from urllib.parse import unquote, urlsplit
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -24,9 +23,37 @@ class References(HTMLParser):
     handle_startendtag = handle_starttag
 
 
+def unpack_admissions(packed):
+    routes = []
+    for route in packed["routes"]:
+        entry = {
+            "name": route["n"],
+            "detailUrl": packed["pages"][route["u"]] + (f"#{route['h']}" if route.get("h") else ""),
+            "requiredSubjects": packed["subjects"][route["r"]],
+        }
+        if "g" in route:
+            entry["group"] = route["g"]
+        if "t" in route:
+            entry["requiredTotal"] = route["t"]
+        if "s" in route:
+            entry["subjectSpecific"] = route["s"]
+        if "c" in route:
+            entry["allowedCenters"] = route["c"]
+        if route.get("o"):
+            entry["totalOrMathEnglish"] = True
+        if route.get("x"):
+            entry["confirmExamStream"] = True
+        routes.append(entry)
+    return routes
+
+
 def load_export(path):
     first_line = path.read_text(encoding="utf-8").partition("\n")[0]
-    return json.loads(first_line.split(" = ", 1)[1].removesuffix(";"))
+    name, payload = first_line.split(" = ", 1)
+    value = json.loads(payload.removesuffix(";"))
+    if name.strip().endswith("unifitAdmissionsPacked"):
+        return unpack_admissions(value)
+    return value
 
 
 def main():
