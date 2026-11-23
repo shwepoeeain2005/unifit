@@ -119,6 +119,8 @@ def main():
         print(f"{layer}: {count} local references")
     for (layer, path, reason), pages in sorted(problems.items()):
         print(f"{layer}: {path} [{reason}] -- {len(pages)} page(s), e.g. {min(pages)}")
+    if problems:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
