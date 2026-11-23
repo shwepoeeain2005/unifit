@@ -182,6 +182,20 @@
         back.href = "../unilists.html";
         back.className = "uni-back-btn";
         back.innerHTML = '<i class="fas fa-arrow-left" aria-hidden="true"></i><span>Back to Universities</span>';
+        if (document.referrer && history.length > 1) {
+            const from = new URL(document.referrer);
+            const directory = new URL(back.href);
+            if (from.origin === directory.origin && from.pathname === directory.pathname) {
+                document.addEventListener("click", (event) => {
+                    if (event.defaultPrevented || event.button !== 0
+                        || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                    const link = event.target.closest("a[href]");
+                    if (link?.href !== directory.href || (link.target && link.target !== "_self")) return;
+                    event.preventDefault();
+                    history.back();
+                });
+            }
+        }
 
         const badgeRow = createEl("div", "uni-hero-badges");
         if (card?.categories) {

@@ -248,12 +248,30 @@
         updateFilterScrollControls();
     }
 
+    const savedList = history.state?.unifitList;
     const requestedCategory = new URLSearchParams(window.location.search).get("category");
-    if (requestedCategory) {
-        const match = buttons.find((button) => button.dataset.category === requestedCategory);
-        if (match) setCategory(match.dataset.category);
-        else applyFilters();
-    } else {
-        applyFilters();
-    }
+    const category = savedList?.category ?? requestedCategory;
+    if (savedList) search.value = savedList.query;
+    setCategory(buttons.some((button) => button.dataset.category === category) ? category : "all");
+
+    history.scrollRestoration = "manual";
+    window.addEventListener("pagehide", () => {
+        history.replaceState({
+            ...history.state,
+            unifitList: {
+                category: selectedCategory,
+                query: search.value,
+                scrollY: window.scrollY,
+                filterScrollLeft: filterTrack?.scrollLeft ?? 0,
+            },
+        }, "");
+    });
+
+    window.addEventListener("pageshow", (event) => {
+        const state = history.state?.unifitList;
+        if (event.persisted || !state) return;
+        window.scrollTo({ top: state.scrollY, behavior: "instant" });
+        filterTrack?.scrollTo({ left: state.filterScrollLeft, behavior: "instant" });
+        updateFilterScrollControls();
+    });
 })();
