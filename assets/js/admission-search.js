@@ -883,24 +883,6 @@
         if (subjectSelect) subjectSelect.focus();
     }
 
-    function renderUnverifiedNotice() {
-        const host = document.getElementById("unverified-notice");
-        const rows = window.unifitUnverified || [];
-        if (!host || !rows.length) return;
-        host.hidden = false;
-        const title = document.createElement("strong");
-        title.textContent = "2026 routes still unverified";
-        const list = document.createElement("ul");
-        for (const row of rows) {
-            const item = document.createElement("li");
-            item.textContent = `${row.university} — ${row.program}`;
-            list.appendChild(item);
-        }
-        host.append(title, list);
-    }
-
-    renderUnverifiedNotice();
-
     ["filter-name", "filter-region", "filter-type", "filter-subject-set", "filter-sort"].forEach(
         (id) => {
             const el = document.getElementById(id);

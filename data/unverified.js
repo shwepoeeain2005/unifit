@@ -1,1 +1,0 @@
-window.unifitUnverified = [{"university":"Bago University","program":"စီးပွားရေးပညာ","status":"withheld — unverified 2026 intake"},{"university":"University of Computer Studies (Thaton)","program":"University of Computer Studies (Thaton)","status":"withheld — unverified 2026 intake"}];

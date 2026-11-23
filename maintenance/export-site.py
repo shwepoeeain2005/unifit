@@ -317,19 +317,6 @@ def export_site(root):
             raise ValueError(f"Admission boxes need detail data for: {', '.join(sorted(missing_pages))}")
         write_admissions_script(root / "data" / "admissions.js", admissions)
 
-        unverified = [
-            dict(university=row["university"], program=row["program"], status=row["review_status"])
-            for row in db.execute(
-                """
-                SELECT university, program, review_status
-                FROM admission_2026_review
-                WHERE review_status LIKE '%withheld%' OR review_status LIKE '%unverified%'
-                ORDER BY university, program
-                """
-            )
-        ]
-        write_script(root / "data" / "unverified.js", "unifitUnverified", unverified)
-
         card_by_url = {card["detail_url"]: card for card in cards}
         for page_path, export_key in pages:
             sections = []
