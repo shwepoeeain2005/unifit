@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us</title>
-  <link rel="stylesheet" href="assets/css/aboutus.css?v=page-bg-2"><link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/aboutus.css?v=home-style-3">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="assets/css/nav.css?v=site-footer-2">
 </head>
@@ -19,105 +19,103 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="index.html">Home</a></li>
     <li><a href="unilists.html">University Lists</a></li>
+    <li><a href="search.html">Search</a></li>
     <li><a href="req1.html">Requirements</a></li>
-    <li><a href="aboutus.html">About Us</a></li>
-    <li class="nav-mobile-cta">
-      <a class="nav-cta" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
-    </li>
   </ul>
   <div class="nav-actions">
-    <a class="nav-cta nav-cta-desktop" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
     <button type="button" class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
       <i class="fas fa-bars" aria-hidden="true"></i>
     </button>
   </div>
 </nav>
 
-  <!-- Heading -->
-  <h2>Meet Our Team</h2>
-
-  <!-- Team Members -->
-  <div class="team-container">
-    <!-- Member 1 -->
-    <div class="member-card">
-      <img src="assets/images/thant.webp" class="member-image" alt="Thant Thadar">
-      <div class="member-name">Thant Thadar</div>
-      <div class="member-tnt">TNT-2427</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-
-    <!-- Member 2 -->
-    <div class="member-card">
-      <img src="assets/images/poe.webp" class="member-image" alt="Shwe Poe Eain">
-      <div class="member-name">Shwe Poe Eain</div>
-      <div class="member-tnt">TNT-2402</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-
-    <!-- Member 3 -->
-    <div class="member-card">
-      <img src="assets/images/chan.webp" class="member-image" alt="Aye Chan Khin">
-      <div class="member-name">Aye Chan Khin</div>
-      <div class="member-tnt">TNT-2333</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-
-    <!-- Member 4 -->
-    <div class="member-card">
-      <img src="assets/images/mon.webp" class="member-image" alt="Aye Mon Thet">
-      <div class="member-name">Aye Mon Thet</div>
-      <div class="member-tnt">TNT-2339</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-
-    <!-- Member 5 -->
-    <div class="member-card">
-      <img src="assets/images/chaw.webp" class="member-image" alt="Chaw Yadana Khin">
-      <div class="member-name">Chaw Yadana Khin</div>
-      <div class="member-tnt">TNT-2422</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-
-    <!-- Member 6 -->
-    <div class="member-card">
-      <img src="assets/images/zin.webp" class="member-image" alt="Ei Kay Zin Aung">
-      <div class="member-name">Ei Kay Zin Aung</div>
-      <div class="member-tnt">TNT-2370</div>
-      <div class="member-role">First Year, Semester II</div>
-      <div class="member-desc">Studies at University of Information Technology(UIT)</div>
-    </div>
-  </div>
-
-  <!-- Aim Section -->
-  <div class="aim-section">
-    <h2 class="aim-heading">Our Aim</h2>
+<main class="about-page">
+  <section class="about-hero" aria-labelledby="about-title">
     <div>
-      <p>
-        “As former Grade 12 students ourselves, we understand the challenges and dreams of those just beginning their
-        journey.
-        That is why, as project members, we have created this website—so today’s freshers can enjoy an incredible
-        platform
-        designed to guide, inspire, and support them. With our effort, we made it easy for students to calculate and
-        check
-        their total marks which technological universities will fit in just a second, simply by adding and searching
-        their scores.
-        Everything has been built with one goal in mind: to make learning smoother and easier for freshers.”
-      </p>
+      <h1 id="about-title">Why we built <span>UniFit</span></h1>
+      <p>Choosing a university after Grade 12 means sorting through scores, majors, and application rules. We built UniFit to make that easier for students in Myanmar.</p>
+      <p>Explore campuses, check published entry requirements, and ask questions in Burmese or English.</p>
+      <a class="about-button" href="unilists.html">Explore universities <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
     </div>
-  </div>
-  <footer class="glass-footer">
-    <div class="footer-left">
-      <img src="assets/images/logo.webp" class="logo">
-      <div class="diva"><span><</span><span>div</span><span>></span><span><</span><span>a</span><span>></span></div>
-    <h4>Own Your Power</h4>
-      <p>Embrace your authentic self, recognize your unique strengths, and use them to navigate life with confidence and purpose.</p>
+    <img src="assets/images/unifit-preview.jpg" alt="UniFit’s university search and chat answering a question about majors" width="1265" height="712">
+  </section>
+
+  <section class="about-section" aria-labelledby="about-values">
+    <h2 id="about-values">What matters to us</h2>
+    <div class="about-grid">
+      <article class="about-card">
+        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+        <h3>Clarity</h3>
+        <p>See which marks, subjects, and other conditions matter for each published admission route.</p>
+      </article>
+      <article class="about-card">
+        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+        <h3>Accuracy</h3>
+        <p>We check requirements against source material and say when a detail is still unverified.</p>
+      </article>
+      <article class="about-card">
+        <i class="fa-solid fa-language" aria-hidden="true"></i>
+        <h3>Accessibility</h3>
+        <p>Browse on a phone or desktop and ask UniFit Chat in Burmese or English.</p>
+      </article>
     </div>
-  </footer>
+  </section>
+
+  <section class="about-section" aria-labelledby="about-team">
+    <h2 id="about-team">Meet the team</h2>
+    <p class="about-intro">UniFit was built by students from the University of Information Technology (UIT).</p>
+    <ul class="about-grid about-team">
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span>
+        <h3>Shwe Poe Eain</h3>
+        <p class="about-role">Full-Stack Developer &amp; Database Developer</p>
+      </li>
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-tie"></i></span>
+        <h3>Aye Chan Khin</h3>
+        <p class="about-role">Data Researcher &amp; Content Writer</p>
+      </li>
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-tie"></i></span>
+        <h3>Ei Kay Zin Aung</h3>
+        <p class="about-role">UI/UX Designer &amp; Frontend Developer</p>
+      </li>
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-graduate"></i></span>
+        <h3>Chaw Yadana Khin</h3>
+        <p class="about-role">Backend Developer &amp; Research Contributor</p>
+      </li>
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-astronaut"></i></span>
+        <h3>Thant Thadar</h3>
+        <p class="about-role">Development &amp; Research Contributor</p>
+      </li>
+      <li class="about-person">
+        <span class="about-avatar" aria-hidden="true"><i class="fa-solid fa-user-astronaut"></i></span>
+        <h3>Aye Mon Thet</h3>
+        <p class="about-role">Development &amp; Research Contributor</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="about-section" aria-labelledby="about-sources">
+    <h2 id="about-sources">Sources and accuracy</h2>
+    <div class="about-grid about-source-grid">
+      <article class="about-card">
+        <i class="fa-solid fa-book" aria-hidden="true"></i>
+        <h3>2026 Admissions Guide</h3>
+        <p>We use the guide for published entry rules, programme listings, and application guidance. UniFit Chat cites printed page numbers when available.</p>
+        <a href="requirement.html">Read the application guidance <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="about-card">
+        <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+        <h3>Official university notices</h3>
+        <p>We consult official notices for campus-specific details. A published application minimum is an entry requirement. The lowest admitted mark describes a past intake.</p>
+      </article>
+    </div>
+    <p class="about-note"><strong>Independent student project.</strong> Universities make the final admissions decisions. Check official university notices for current requirements and deadlines before you apply.</p>
+  </section>
+</main>
 <script src="assets/js/nav.js?v=polish-1"></script>
 </body>
 </html>

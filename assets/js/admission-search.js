@@ -336,18 +336,16 @@
     function generateSubjects() {
         const selectedSet = document.getElementById("subject-set").value;
         const container = document.getElementById("generated-subjects");
-        const empty = document.getElementById("subjects-empty");
+        const marksEntry = document.getElementById("marks-entry");
 
         container.innerHTML = "";
         clearFormError();
+        marksEntry.hidden = !selectedSet;
 
         if (!selectedSet) {
-            if (empty) empty.hidden = false;
             updateLiveTotal();
             return;
         }
-
-        if (empty) empty.hidden = true;
 
         subjectSets[selectedSet].forEach((sub) => {
             const wrap = document.createElement("div");
@@ -495,6 +493,7 @@
         if (meta.childElementCount) copy.appendChild(meta);
 
         top.append(thumb, copy);
+        if (entry.campus) top.appendChild(window.unifitShortlist.createButton(entry.campus));
         card.appendChild(top);
 
         if (entry.isGroup) {

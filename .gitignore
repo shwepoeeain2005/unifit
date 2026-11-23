@@ -5,3 +5,4 @@ desktop.ini
 *.sqlite-shm
 *.sqlite-wal
 /Mawlamyin
+.env

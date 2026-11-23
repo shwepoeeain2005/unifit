@@ -97,3 +97,23 @@ YTU's card is ID 17. Its admissions row is `legacy:690` and cites printed pages 
 4. Run the integrity queries, export and link audit above. Refresh the preview and check the specific university in University List, Search Your Uni and its detail page. For a score rule change, try a score immediately below and at the minimum, plus any applicable stream or regional case.
 
 The active SQLite file already contains the imported data and review records. The scripts in `maintenance/migrations/` document past batch updates and assume the folder layout that existed when they ran. Routine updates to an existing reviewed record use DBeaver and `export-site.py`.
+## Local chat preview
+
+Run `python maintenance/serve-chat.py --port 8084` from the UniFit checkout and open
+`http://127.0.0.1:8084/requirement.html`.
+
+The preview uses reviewed SQLite answers by default. For hosted model replies, configure
+`GEMINI_API_KEY` in the server environment and restart the preview to use Gemini.
+For local development, place `GEMINI_API_KEY=your-key` in the ignored `.env` file
+at the checkout root. The server reads it at startup. Values in that file override
+the same settings in the terminal. Gemini takes precedence when both keys are present.
+`UNIFIT_GEMINI_MODEL` overrides
+the default `gemini-3.8-flash`. The server sends the question, recent conversation,
+and relevant reviewed records to Google in Gemini mode.
+
+For OpenAI instead, configure
+`OPENAI_API_KEY` in the environment of the server process and restart it. Keep the key
+outside Git and the browser. Optionally set `UNIFIT_OPENAI_MODEL` to an accessible model
+that supports Responses API structured outputs. The default is `gpt-4.1-mini`.
+In hosted-model mode, the server sends the question, recent conversation and relevant
+reviewed records to OpenAI. The API request disables response storage.

@@ -1,4 +1,8 @@
 (() => {
+    const chat = document.createElement("script");
+    chat.src = new URL("chat.js", document.currentScript.src);
+    document.head.appendChild(chat);
+
     const nav = document.querySelector("nav.links");
     if (!nav) return;
 

@@ -10,7 +10,11 @@
     const filterNext = document.getElementById("filter-next");
     const buttons = [...document.querySelectorAll(".filter-buttons button[data-category]")];
     const noResults = document.getElementById("no-results-message");
+    const emptyMessage = document.getElementById("empty-message");
+    const savedButton = document.getElementById("saved-universities");
+    const directoryHeading = document.getElementById("directory-heading");
     const resultsCount = document.getElementById("results-count");
+    const shortlist = window.unifitShortlist;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (!list || !template || !search || !window.unifitCards) {
@@ -97,6 +101,7 @@
         }
 
         if (record.detail_url && cta) {
+            card.querySelector(".card-media").appendChild(shortlist.createButton(record));
             card.dataset.detailUrl = record.detail_url;
             cta.href = record.detail_url;
             cta.setAttribute("aria-label", `Explore details for ${record.name}`);
@@ -120,6 +125,7 @@
         setupAddressToggle(card);
         cards.push({
             card,
+            id: record.id,
             text: `${record.name} ${cleanAddress(record.address)}`.toLowerCase(),
             name: record.name,
         });
@@ -148,6 +154,11 @@
 
         if (!noResults) return;
         const empty = visibleCount === 0;
+        if (emptyMessage) {
+            emptyMessage.textContent = selectedCategory === "saved"
+                ? "Bookmark universities to build your shortlist, or clear filters to browse all campuses."
+                : "Try a different search term or choose another category.";
+        }
         noResults.hidden = !empty;
         noResults.classList.toggle("is-visible", empty);
         noResults.style.display = empty ? "flex" : "none";
@@ -162,9 +173,10 @@
 
         let visibleCount = 0;
         let stagger = 0;
-        for (const { card, text, name } of cards) {
+        for (const { card, id, text, name } of cards) {
             const matchesCategory =
-                selectedCategory === "all" || card.classList.contains(selectedCategory);
+                selectedCategory === "saved" ? shortlist.has(id)
+                    : selectedCategory === "all" || card.classList.contains(selectedCategory);
             const matchesSearch = campus
                 ? card.dataset.detailUrl === campus
                 : category
@@ -190,6 +202,9 @@
 
     function setCategory(category) {
         selectedCategory = category;
+        const showingSaved = category === "saved";
+        savedButton.setAttribute("aria-pressed", String(showingSaved));
+        directoryHeading.textContent = showingSaved ? "Saved Universities" : "Explore Universities";
         for (const option of buttons) {
             const active = option.dataset.category === category;
             option.classList.toggle("active", active);
@@ -211,6 +226,12 @@
     }
 
     search.addEventListener("input", applyFilters);
+    savedButton.addEventListener("click", () => {
+        setCategory(selectedCategory === "saved" ? "all" : "saved");
+    });
+    window.addEventListener("unifit:shortlist-change", () => {
+        if (selectedCategory === "saved") applyFilters();
+    });
 
     if (searchClear) {
         searchClear.addEventListener("click", () => {
@@ -252,7 +273,10 @@
     const requestedCategory = new URLSearchParams(window.location.search).get("category");
     const category = savedList?.category ?? requestedCategory;
     if (savedList) search.value = savedList.query;
-    setCategory(buttons.some((button) => button.dataset.category === category) ? category : "all");
+    setCategory(
+        category === "saved" || buttons.some((button) => button.dataset.category === category)
+            ? category : "all"
+    );
 
     history.scrollRestoration = "manual";
     window.addEventListener("pagehide", () => {

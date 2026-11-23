@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="assets/css/search.css?v=polish-1">
+  <link rel="stylesheet" href="assets/css/search.css?v=marks-panel-1">
+  <link rel="stylesheet" href="assets/css/shortlist.css?v=2">
   <link rel="stylesheet" href="assets/css/nav.css?v=polish-1">
 </head>
 
@@ -22,14 +23,10 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="unilists.html">University Lists</a></li>
+      <li><a href="search.html">Search</a></li>
       <li><a href="req1.html">Requirements</a></li>
-      <li><a href="aboutus.html">About Us</a></li>
-      <li class="nav-mobile-cta">
-        <a class="nav-cta" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
-      </li>
     </ul>
     <div class="nav-actions">
-      <a class="nav-cta nav-cta-desktop" href="search.html"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Search Your Uni</a>
       <button type="button" class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false">
         <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
@@ -53,7 +50,7 @@
         </div>
         <label class="field-label" for="subject-set">Select Subject Set</label>
         <div class="subject-select-box">
-          <select id="subject-set">
+          <select id="subject-set" aria-controls="marks-entry">
             <option value="">Choose Your Subject Set</option>
             <option value="STEAMS1">STEAMS 1</option>
             <option value="STEAMS2">STEAMS 2</option>
@@ -61,28 +58,22 @@
             <option value="STAMS2">STAMS 2</option>
           </select>
         </div>
-      </div>
-
-      <div class="dashboard-panel marks-panel">
-        <div class="panel-head">
-          <span class="panel-icon" aria-hidden="true"><i class="fas fa-pen-to-square"></i></span>
-          <div>
-            <h2>Enter Your Marks</h2>
-            <p>Marks must be between 40 and 100 for each subject.</p>
+        <section id="marks-entry" class="marks-entry" aria-labelledby="marks-entry-heading" hidden>
+          <div class="panel-head">
+            <span class="panel-icon" aria-hidden="true"><i class="fas fa-pen-to-square"></i></span>
+            <div>
+              <h2 id="marks-entry-heading">Enter Your Marks</h2>
+              <p>Marks must be between 40 and 100 for each subject.</p>
+            </div>
           </div>
-        </div>
 
-        <div id="subjects-empty" class="subjects-empty">
-          <i class="fas fa-arrow-up" aria-hidden="true"></i>
-          <p>Select a subject set to start entering marks.</p>
-        </div>
+          <div id="generated-subjects" class="subject-grid"></div>
 
-        <div id="generated-subjects" class="subject-grid"></div>
-
-        <div id="total-box" class="total-box" hidden>
-          <span class="total-label">Total Marks</span>
-          <span id="total-score" class="total-value" aria-live="polite">0</span>
-        </div>
+          <div id="total-box" class="total-box" hidden>
+            <span class="total-label">Total Marks</span>
+            <span id="total-score" class="total-value" aria-live="polite">0</span>
+          </div>
+        </section>
       </div>
 
       <div class="dashboard-panel center-panel">
@@ -159,6 +150,14 @@
 
       <div id="stream-banner" class="stream-banner" hidden role="status"></div>
 
+      <div class="search-results-heading">
+        <h2>University Matches</h2>
+        <a class="shortlist-link" href="unilists.html?category=saved#university-results">
+          <i class="fas fa-bookmark" aria-hidden="true"></i>
+          Saved Universities (<span data-shortlist-count>0</span>)
+        </a>
+      </div>
+
       <div class="results-toolbar" role="search">
         <div class="toolbar-field toolbar-search">
           <label class="sr-only" for="filter-name">Search by university name</label>
@@ -218,7 +217,8 @@
   <script src="data/universities.js"></script>
   <script src="data/admissions.js?v=2026-admissions-4"></script>
   <script src="assets/js/admission-rules.js?v=2026-admissions-4"></script>
-  <script src="assets/js/admission-search.js?v=polish-1"></script>
+  <script src="assets/js/shortlist.js?v=2"></script>
+  <script src="assets/js/admission-search.js?v=marks-panel-1"></script>
 </body>
 
 </html>

@@ -1,0 +1,83 @@
+.campus-bookmark {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid #ced8e5;
+  border-radius: 12px;
+  background: #fff;
+  color: #19345d;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.campus-bookmark:hover,
+.campus-bookmark[aria-pressed="true"] {
+  border-color: #bb9200;
+  background: #ffd93d;
+}
+
+.campus-bookmark:focus-visible {
+  outline: 2px solid #19345d;
+  outline-offset: 2px;
+}
+
+.uni-card-media > .campus-bookmark {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
+}
+
+.uni-card-media:has(> .campus-bookmark) > .uni-card-badge {
+  max-width: calc(100% - 4.6rem);
+}
+
+.shortlist-actions,
+.search-results-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.search-results-heading {
+  justify-content: space-between;
+  margin-block: 1rem;
+}
+
+.search-results-heading h2 {
+  margin: 0;
+  color: var(--search-navy);
+  font-size: 1.25rem;
+}
+
+.shortlist-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #ced8e5;
+  border-radius: 12px;
+  background: #fff;
+  color: #19345d;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shortlist-link:hover,
+.shortlist-link[aria-pressed="true"] {
+  border-color: #bb9200;
+  background: #ffd93d;
+}
+
+.shortlist-link:focus-visible {
+  outline: 2px solid #19345d;
+  outline-offset: 2px;
+}
