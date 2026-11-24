@@ -1,4 +1,5 @@
 import { cp, mkdir, readdir, rm } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
@@ -17,4 +18,21 @@ for (const entry of await readdir(root, { withFileTypes: true })) {
             filter: source => !source.split(/[\\/]/).pop().startsWith("."),
         });
     }
+}
+
+const configOut = join(output, "assets", "js", "unifit-api-config.js");
+const writeConfig = spawnSync(
+    process.execPath,
+    [join(root, "maintenance", "write-unifit-api-config.mjs")],
+    {
+        env: {
+            ...process.env,
+            UNIFIT_API_CONFIG_OUT: configOut,
+        },
+        stdio: "inherit",
+    },
+);
+
+if (writeConfig.status !== 0) {
+    process.exit(writeConfig.status ?? 1);
 }
