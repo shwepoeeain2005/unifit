@@ -1,0 +1,4 @@
+# Static frontend only — API runs on Render (not published here).
+[build]
+  command = "node maintenance/netlify-build.mjs"
+  publish = "dist"

@@ -1,3 +1,6 @@
+node_modules/
+dist/
+
 __pycache__/
 *.pyc
 desktop.ini
@@ -6,6 +9,7 @@ desktop.ini
 *.sqlite-wal
 /Mawlamyin
 .env
+.env.local
+.env.*.local
 .env.*
 .vercel/
-/dist/

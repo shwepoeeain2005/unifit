@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="unifit-api-generate-path" content="/api/assistant/chat">
   <title>Search Your Uni</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="assets/css/search.css?v=marks-panel-1">
   <link rel="stylesheet" href="assets/css/shortlist.css?v=2">
+  <link rel="stylesheet" href="assets/css/gemini-assistant.css?v=1">
   <link rel="stylesheet" href="assets/css/nav.css?v=polish-1">
 </head>
 
@@ -125,6 +127,34 @@
       </div>
     </section>
 
+    <section class="dashboard-panel unifit-gemini" id="unifit-gemini" aria-labelledby="unifit-gemini-heading">
+      <div class="panel-head">
+        <span class="panel-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>
+        <div>
+          <h2 id="unifit-gemini-heading">Ask UniFit</h2>
+          <p>Questions about subject sets and using this search</p>
+        </div>
+      </div>
+      <p class="unifit-gemini-hint">
+        Guidance only — always confirm admission rules with the university.
+      </p>
+      <label class="sr-only" for="unifit-gemini-prompt">Your question</label>
+      <textarea
+        id="unifit-gemini-prompt"
+        class="unifit-gemini-field"
+        rows="3"
+        placeholder="e.g. What is STEAMS 1 and how does total marks matching work?"
+        maxlength="8000"
+      ></textarea>
+      <div class="unifit-gemini-actions">
+        <button type="button" class="search-btn" id="unifit-gemini-submit">
+          <span class="search-btn-label"><i class="fas fa-paper-plane" aria-hidden="true"></i> Ask</span>
+        </button>
+      </div>
+      <p id="unifit-gemini-status" class="unifit-gemini-status" role="status" aria-live="polite" hidden></p>
+      <div id="unifit-gemini-answer" class="unifit-gemini-answer" hidden></div>
+    </section>
+
     <div id="loading-spinner" class="loading-spinner" hidden role="status" aria-live="polite">
       <div class="spinner" aria-hidden="true"></div>
       <p>Checking your results…</p>
@@ -219,6 +249,9 @@
   <script src="assets/js/admission-rules.js?v=2026-admissions-4"></script>
   <script src="assets/js/shortlist.js?v=2"></script>
   <script src="assets/js/admission-search.js?v=marks-panel-1"></script>
+  <script src="assets/js/unifit-api-config.js?v=1"></script>
+  <script src="assets/js/gemini-api.js?v=4"></script>
+  <script src="assets/js/gemini-assistant.js?v=3"></script>
 </body>
 
 </html>

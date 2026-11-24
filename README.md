@@ -22,6 +22,8 @@ Browse campuses by category or search by name. You can search within a selected 
 
 Choose your matriculation subject set to reveal the marks fields. Enter your marks and select your exam centre to see programmes that match the published criteria. Use **More Details** to open the university's admissions section. A match is guidance for applying. Final admission decisions are made by the university.
 
+The **Ask UniFit** panel on this page sends questions to the Node assistant API (`POST /api/assistant/chat`) with optional match context from your search.
+
 Example search using STEAMS 1, 85 marks in each subject, and a Yangon exam centre.
 
 ![Search Your Uni form with STEAMS 1 selected, 85 entered for all six subjects, and Yangon selected as the exam centre](docs/screenshots/search-marks.jpg)
@@ -60,14 +62,16 @@ The search page applies published criteria using the selected subject set, marks
 
 ### Chat answers
 
-The browser sends questions to the Python endpoint at `/api/chat`. The server looks up reviewed records in SQLite and can use Gemini for questions that need a model response. The Gemini key is stored on the server.
+- **Navigation chat** — The browser sends questions to the Python endpoint at `/api/chat`. The server looks up reviewed records in SQLite and can use Gemini for questions that need a model response.
+- **Ask UniFit (Search Your Uni)** — Uses the Node backend at `/api/assistant/chat` (OpenRouter). API keys stay on the server only.
 
 ## Tech stack
 
 - **Frontend** — HTML, CSS, and JavaScript
 - **Data** — SQLite and generated JSON files
-- **Chat** — Python and Gemini API
-- **Deployment** — Vercel static site and Python Function
+- **Navigation chat** — Python (`api/chat.py`) and optional Gemini
+- **Search assistant** — Node.js (`server/`) and OpenRouter
+- **Deployment** — Netlify (static site) + Render (Node API); Vercel config remains for the Python chat path
 
 ## Repository layout
 
@@ -77,8 +81,9 @@ The browser sends questions to the Python endpoint at `/api/chat`. The server lo
 | `assets/` | Stylesheets, JavaScript, and images |
 | `data/` | Generated university, admissions, and profile data |
 | `maintenance/` | SQLite database, exporter, link checker, and maintenance guide |
-| `api/chat.py` | Vercel entry point for chat |
+| `api/chat.py` | Vercel entry point for navigation chat |
 | `vercel.json` | Vercel build and function configuration |
+| `server/` | Node backend for the OpenRouter search assistant (`npm run start:api`) |
 
 ## Run locally
 
@@ -92,6 +97,16 @@ python -m http.server 8082 --bind 127.0.0.1
 
 Keep the terminal open and visit [the website preview](http://127.0.0.1:8082/). The website uses the generated data included in the repo.
 
+### Ask UniFit API (Search Your Uni)
+
+Copy `.env.example` to `.env`. Set `OPENROUTER_API_KEY` and `OPENROUTER_MODEL`. In a second terminal:
+
+```powershell
+npm run start:api
+```
+
+The server listens on `http://127.0.0.1:3001` and exposes **`POST /api/assistant/chat`**. On localhost, Ask UniFit uses that URL automatically (no `UNIFIT_API_BASE` required).
+
 ### Chat preview
 
 ```powershell
@@ -99,6 +114,26 @@ python maintenance/serve-chat.py --port 8084
 ```
 
 Visit [the chat preview](http://127.0.0.1:8084/) and click the chat icon. SQLite lookup works without a Gemini key. To enable Gemini, put `GEMINI_API_KEY` in the Git-ignored local `.env` file or set it in the server environment before starting the preview.
+
+## Deploy: Netlify (frontend) + Render (search assistant)
+
+**Netlify** serves the static site from `dist/` (see `netlify.toml`). The build copies HTML/CSS/JS only—`server/` and `node_modules/` are not published.
+
+| Netlify setting | Value |
+| --- | --- |
+| Build command | `node maintenance/netlify-build.mjs` or `npm run build:netlify` |
+| Publish directory | `dist` |
+| Build environment | `UNIFIT_API_BASE` = your Render service URL (no trailing slash) |
+
+**Render** runs the Node API from the repository root.
+
+| Render setting | Value |
+| --- | --- |
+| Build command | `npm install` |
+| Start command | `npm run start:api` |
+| Environment | `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `CORS_ORIGINS` (your Netlify origin), `OPENROUTER_SITE_URL` |
+
+Optional Gemini rollback: set `ENABLE_GEMINI_ROLLBACK_ROUTE=1` and `GEMINI_*` only when needed.
 
 ## Maintain and deploy
 
@@ -109,4 +144,4 @@ python maintenance/export-site.py
 python maintenance/check-links.py
 ```
 
-For deployment, import the GitHub repository into Vercel and use the checked-in configuration. Set `GEMINI_API_KEY` as a sensitive environment variable for the deployment that should use Gemini. See the [maintenance guide](maintenance/README.md) for deployment verification, database tables, and sample queries.
+For the Python navigation chat on Vercel, use the checked-in `vercel.json` and set `GEMINI_API_KEY` as a sensitive environment variable. See the [maintenance guide](maintenance/README.md) for deployment verification, database tables, and sample queries.

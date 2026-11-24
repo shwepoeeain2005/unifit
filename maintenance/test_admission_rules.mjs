@@ -5,14 +5,27 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
-const require = createRequire(import.meta.url);
-const { checkUniversity } = require(path.join(root, "assets", "js", "admission-rules.js"));
+
+function loadCheckUniversity() {
+  const source = fs.readFileSync(path.join(root, "assets", "js", "admission-rules.js"), "utf8");
+  const module = { exports: {} };
+  vm.runInNewContext(source, {
+    module,
+    exports: module.exports,
+    globalThis: globalThis,
+  });
+  if (typeof module.exports.checkUniversity !== "function") {
+    throw new Error("admission-rules.js did not export checkUniversity");
+  }
+  return module.exports.checkUniversity;
+}
+
+const checkUniversity = loadCheckUniversity();
 
 function loadAdmissions() {
   const source = fs.readFileSync(path.join(root, "data", "admissions.js"), "utf8");

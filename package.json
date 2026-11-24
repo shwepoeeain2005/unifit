@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "start:api": "node server/index.mjs",
+    "build": "node maintenance/netlify-build.mjs",
+    "build:netlify": "node maintenance/netlify-build.mjs",
+    "test": "node maintenance/test_admission_rules.mjs",
+    "test:admissions": "node maintenance/test_admission_rules.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^3.6.1",
+    "dotenv": "^18.0.10",
+    "openai": "^7.63.0"
+  }
+}

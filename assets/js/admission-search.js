@@ -927,4 +927,37 @@
     window.generateSubjects = generateSubjects;
     window.searchUniversities = searchUniversities;
     window.clearForm = clearForm;
+
+    window.unifitSearchSnapshot = function unifitSearchSnapshot() {
+        const resultsPanel = document.getElementById("results-panel");
+        const subjectSet = document.getElementById("subject-set")?.value || "";
+        const testCenter = document.getElementById("division-select")?.value || "";
+        const totalMarks = lastMarksTotal
+            || Number(document.getElementById("summary-total")?.textContent)
+            || 0;
+
+        const snapshot = {
+            subjectSet,
+            testCenter,
+            totalMarks,
+            matchCount: 0,
+            recommendations: [],
+        };
+
+        if (!resultsPanel || resultsPanel.hidden || !lastResultGroups.length) {
+            return snapshot;
+        }
+
+        snapshot.matchCount = lastResultGroups.length;
+        snapshot.recommendations = lastResultGroups.slice(0, 20).map((group) => ({
+            university: group.title,
+            region: group.regionLabel || "",
+            type: group.typeLabel || "",
+            location: group.location || "",
+            majors: group.list.slice(0, 10).map((route) => route.name),
+            requiredTotal: group.lead?.requiredTotal ?? null,
+        }));
+
+        return snapshot;
+    };
 })();
