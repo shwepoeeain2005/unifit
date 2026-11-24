@@ -1,0 +1,3 @@
+# Prevent the dev stub from being deployed if Vercel uploads the repo root.
+# Production must use dist/ from build-public.mjs (see vercel.json outputDirectory).
+assets/js/unifit-api-config.js
