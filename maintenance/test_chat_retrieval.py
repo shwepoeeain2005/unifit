@@ -16,6 +16,17 @@ def ask(question, history=()):
 
 
 class ChatRetrievalTests(unittest.TestCase):
+    def test_typos_and_off_topic_questions(self):
+        for typo, original in (
+            ("locaton of uit", "location of uit"),
+            ("Does MMU require an interveiw?", "Does MMU require an interview?"),
+            ("NSPU computing requirments ဘယ်နှမှတ်လိုလဲ", "NSPU computing requirements ဘယ်နှမှတ်လိုလဲ"),
+        ):
+            with self.subTest(typo=typo):
+                self.assertEqual(ask(typo), ask(original))
+        self.assertIn("Myanmar universities", ask("What is the weather in Yangon today?")["text"])
+        self.assertIn("ဝင်ခွင့်", ask("ရန်ကုန် မိုးလေဝသ ဘယ်လိုလဲ")["text"])
+
     def test_guide_paraphrases_and_scope(self):
         cases = (
             ("Who can apply for remote learning?", 153, "2026 matriculation"),

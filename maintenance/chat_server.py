@@ -16,6 +16,19 @@ from chat_lookup import guide_query, local_lookup
 
 ROOT = Path(__file__).resolve().parents[1]
 DATABASE = Path(__file__).with_name("unifit.sqlite")
+QUESTION_TYPOS = {
+    "locaton": "location", "loaction": "location", "locaiton": "location",
+    "interveiw": "interview", "interviw": "interview",
+    "requirments": "requirements", "requriements": "requirements",
+    "admisson": "admission", "admissons": "admissions",
+    "comparision": "comparison", "tution": "tuition",
+}
+TYPO_PATTERN = re.compile(r"(?<![a-z0-9])(?:" + "|".join(QUESTION_TYPOS) + r")(?![a-z0-9])", re.I | re.ASCII)
+OFF_TOPIC = re.compile(
+    r"\b(?:weather forecast|weather (?:in|today|tomorrow)|"
+    r"(?:tell me|write) (?:a joke|a poem)|latest sports scores?)\b"
+    r"|မိုးလေဝသ|ရာသီဥတု", re.I,
+)
 ROUTES = (
     (r"dent|သွားဘက်", "dentistry-interview", "requirement.html"),
     (r"(?:medicine|medical|ဆေးတက္ကသိုလ်).*(?:interview|date|လူတွေ့|နှုတ်မေး|ဘယ်တော့)|(?:interview|လူတွေ့).*?(?:medicine|medical|ဆေးတက္ကသိုလ်)", "medicine-interview", "requirement.html"),
@@ -318,7 +331,17 @@ class ChatHandler(BaseHTTPRequestHandler):
             self.send_error(400)
             return
         try:
-            result = campus_interview_answer(question, language, page, history)
+            question = TYPO_PATTERN.sub(lambda match: QUESTION_TYPOS[match.group().lower()], question)
+            result = None
+            if OFF_TOPIC.search(question):
+                my = language == "my" or (language == "auto" and re.search(r"[\u1000-\u109f]", question))
+                result = {
+                    "text": ("UniFit မှာ တက္ကသိုလ်၊ မေဂျာနဲ့ ဝင်ခွင့်ဆိုင်ရာ မေးခွန်းတွေကို မေးနိုင်ပါတယ်။"
+                             if my else "I can help with Myanmar universities, majors, and admissions. Try asking about a university’s entry requirements or the documents you need to apply."),
+                    "language": "my" if my else "en",
+                }
+            if result is None:
+                result = campus_interview_answer(question, language, page, history)
             if result is None:
                 result = data_quick_answer(question, language, history)
             if result is None:
