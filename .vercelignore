@@ -1,2 +1,2 @@
-# Production config is generated only in dist/ (unifit-api-config.built.js).
-assets/js/unifit-api-config.built.js
+# Production config is generated only in dist/ (unifit-api-config.js).
+assets/js/unifit-api-config.js

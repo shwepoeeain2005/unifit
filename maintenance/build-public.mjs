@@ -12,7 +12,7 @@ function normalizeApiBase(value) {
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const output = join(root, "dist");
-const builtConfigName = "unifit-api-config.built.js";
+const builtConfigName = "unifit-api-config.js";
 const builtConfigRel = `assets/js/${builtConfigName}`;
 
 console.log("[build-public] start", {

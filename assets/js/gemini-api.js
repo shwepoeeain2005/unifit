@@ -22,12 +22,21 @@
         return DEFAULT_CHAT_PATH;
     }
 
+    function readConfiguredApiBase() {
+        const global = typeof globalThis !== "undefined"
+            ? globalThis
+            : (typeof window !== "undefined" ? window : null);
+        const raw = global && global.__UNIFIT_API_BASE__;
+        if (typeof raw === "string" && raw.trim()) {
+            return raw.trim().replace(/\/$/, "");
+        }
+        return "";
+    }
+
     function resolveApiBase() {
-        const fromRuntime = typeof globalThis.__UNIFIT_API_BASE__ === "string"
-            ? globalThis.__UNIFIT_API_BASE__.trim()
-            : "";
+        const fromRuntime = readConfiguredApiBase();
         if (fromRuntime) {
-            return fromRuntime.replace(/\/$/, "");
+            return fromRuntime;
         }
         const meta = document.querySelector('meta[name="unifit-api-base"]');
         const fromMeta = meta && meta.getAttribute("content");
