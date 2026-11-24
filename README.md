@@ -115,17 +115,17 @@ python maintenance/serve-chat.py --port 8084
 
 Visit [the chat preview](http://127.0.0.1:8084/) and click the chat icon. SQLite lookup works without a Gemini key. To enable Gemini, put `GEMINI_API_KEY` in the Git-ignored local `.env` file or set it in the server environment before starting the preview.
 
-## Deploy: Netlify (frontend) + Render (search assistant)
+## Deploy on Netlify and Render
 
-**Netlify** serves the static site from `dist/` (see `netlify.toml`). The build copies HTML/CSS/JS only—`server/` and `node_modules/` are not published.
+**Netlify** serves the public pages, assets, and generated site data from `dist/` (see `netlify.toml`). Both Render URLs are public origins. Store provider keys in the corresponding Render service settings.
 
 | Netlify setting | Value |
 | --- | --- |
 | Build command | `node maintenance/netlify-build.mjs` or `npm run build:netlify` |
 | Publish directory | `dist` |
-| Build environment | `UNIFIT_API_BASE` = your Render service URL (no trailing slash) |
+| Build environment | `UNIFIT_API_BASE` = Node Render origin. `UNIFIT_CHAT_API_BASE` = Python Render HTTPS origin. |
 
-**Render** runs the Node API from the repository root.
+**Ask UniFit** uses the Node Render service from the repository root.
 
 | Render setting | Value |
 | --- | --- |
@@ -134,6 +134,17 @@ Visit [the chat preview](http://127.0.0.1:8084/) and click the chat icon. SQLite
 | Environment | `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `CORS_ORIGINS` (your Netlify origin), `OPENROUTER_SITE_URL` |
 
 Optional Gemini rollback: set `ENABLE_GEMINI_ROLLBACK_ROUTE=1` and `GEMINI_*` only when needed.
+
+**UniFit Chat** in the navigation uses a second Render Web Service with the Python runtime. Keep its root at the repository root so the bundled SQLite database is available.
+
+| Render setting | Value |
+| --- | --- |
+| Build command | `python -m compileall -q maintenance` |
+| Start command | `python maintenance/serve-render-chat.py` |
+| Health check path | `/health` |
+| Optional model environment | `GEMINI_API_KEY` and `UNIFIT_GEMINI_MODEL` (use `gemini-3.5-flash-lite` to match the local demo configuration) |
+
+Set the Netlify variables and redeploy to generate the same-origin `/api/chat` proxy. In a Netlify preview, run a marks search, ask Ask UniFit about the results, and ask UniFit Chat “Who gives me my exam records?” Then check a model-backed reply with each provider configured.
 
 ## Maintain and deploy
 
