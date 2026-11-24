@@ -12,6 +12,16 @@ function normalizeApiBase(value) {
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const output = join(root, "dist");
+const builtConfigName = "unifit-api-config.built.js";
+const builtConfigRel = `assets/js/${builtConfigName}`;
+
+console.log("[build-public] start", {
+    vercel: process.env.VERCEL === "1",
+    vercelEnv: process.env.VERCEL_ENV || "",
+    unifitApiBase: process.env.UNIFIT_API_BASE ? "set" : "empty",
+    output: "dist",
+});
+
 await rm(output, { recursive: true, force: true });
 await mkdir(output);
 
@@ -27,7 +37,7 @@ for (const entry of await readdir(root, { withFileTypes: true })) {
                 if (base.startsWith(".")) {
                     return false;
                 }
-                if (base === "unifit-api-config.js") {
+                if (base === "unifit-api-config.js" || base === builtConfigName) {
                     return false;
                 }
                 return true;
@@ -36,7 +46,7 @@ for (const entry of await readdir(root, { withFileTypes: true })) {
     }
 }
 
-const configOut = join(output, "assets", "js", "unifit-api-config.js");
+const configOut = join(output, builtConfigRel);
 const writeConfig = spawnSync(
     process.execPath,
     [join(root, "maintenance", "write-unifit-api-config.mjs")],
@@ -51,6 +61,12 @@ const writeConfig = spawnSync(
 
 if (writeConfig.status !== 0) {
     process.exit(writeConfig.status ?? 1);
+}
+
+const generatedConfig = await readFile(configOut, "utf8");
+if (!generatedConfig.includes("Generated at build time")) {
+    console.error("[build-public] configuration file was not generated correctly:", configOut);
+    process.exit(1);
 }
 
 const apiBase = normalizeApiBase(process.env.UNIFIT_API_BASE || "");
@@ -86,5 +102,24 @@ if (apiBase) {
             (match) => `${match}\n  ${inlineTag}`,
         );
     }
+    const configScript = `<script src="${builtConfigRel}?v=1"></script>`;
+    if (!html.includes(builtConfigName)) {
+        html = html.replace(
+            /<script\s+src="assets\/js\/gemini-api\.js[^"]*"><\/script>/i,
+            `${configScript}\n  $&`,
+        );
+    }
     await writeFile(searchHtmlPath, html, "utf8");
 }
+
+await writeFile(
+    join(output, ".unifit-build.json"),
+    `${JSON.stringify({
+        builtAt: new Date().toISOString(),
+        apiBaseConfigured: Boolean(apiBase),
+        configScript: builtConfigRel,
+    })}\n`,
+    "utf8",
+);
+
+console.log("[build-public] done", { configOut: builtConfigRel, apiBaseConfigured: Boolean(apiBase) });

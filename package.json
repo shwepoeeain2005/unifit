@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "start:api": "node server/index.mjs",
-    "build": "node maintenance/netlify-build.mjs",
+    "build": "node maintenance/build-public.mjs",
     "build:netlify": "node maintenance/netlify-build.mjs",
     "test": "node maintenance/test_admission_rules.mjs",
     "test:admissions": "node maintenance/test_admission_rules.mjs"

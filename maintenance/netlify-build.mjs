@@ -21,10 +21,6 @@ function runScript(name, env = process.env) {
 }
 
 runScript("./build-public.mjs");
-runScript("./write-unifit-api-config.mjs", {
-    ...process.env,
-    UNIFIT_API_CONFIG_OUT: "dist/assets/js/unifit-api-config.js",
-});
 
 if (chatUrl) {
     writeFileSync(new URL("../dist/_redirects", import.meta.url),
