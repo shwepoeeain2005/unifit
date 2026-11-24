@@ -38,6 +38,10 @@
         if (host === "127.0.0.1" || host === "localhost") {
             return "http://127.0.0.1:3001";
         }
+        // Vercel: middleware proxies /api/assistant/chat to Render (UNIFIT_API_BASE).
+        if (host.endsWith(".vercel.app") || host.endsWith(".vercel.sh")) {
+            return window.location.origin.replace(/\/$/, "");
+        }
         return "";
     }
 
