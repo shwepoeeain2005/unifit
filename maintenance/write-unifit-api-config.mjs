@@ -20,6 +20,15 @@ function normalizeApiBase(value) {
 }
 
 const apiBase = normalizeApiBase(process.env.UNIFIT_API_BASE || "");
+const onVercel = process.env.VERCEL === "1";
+if (onVercel && !apiBase) {
+    console.error(
+        "UNIFIT_API_BASE is missing or empty. In Vercel → Project → Settings → Environment Variables, "
+        + "set UNIFIT_API_BASE for Production and enable it for Builds, then redeploy.",
+    );
+    process.exit(1);
+}
+
 const outRel = process.env.UNIFIT_API_CONFIG_OUT || "assets/js/unifit-api-config.js";
 const outPath = path.isAbsolute(outRel) ? outRel : path.join(repoRoot, outRel);
 

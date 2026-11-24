@@ -22,36 +22,33 @@
         return DEFAULT_CHAT_PATH;
     }
 
-    function readConfiguredApiBase() {
-        const global = typeof globalThis !== "undefined"
-            ? globalThis
-            : (typeof window !== "undefined" ? window : null);
-        const raw = global && global.__UNIFIT_API_BASE__;
-        if (typeof raw === "string" && raw.trim()) {
-            return raw.trim().replace(/\/$/, "");
-        }
-        return "";
-    }
-
-    function resolveApiBase() {
-        const fromRuntime = readConfiguredApiBase();
-        if (fromRuntime) {
-            return fromRuntime;
-        }
-        const meta = document.querySelector('meta[name="unifit-api-base"]');
-        const fromMeta = meta && meta.getAttribute("content");
-        if (fromMeta && fromMeta.trim()) {
-            return fromMeta.trim().replace(/\/$/, "");
+    /**
+     * Local dev: absolute URL to the Node API. Production: same-origin relative path
+     * (Vercel rewrite → Render). No UNIFIT_API_BASE in the browser.
+     */
+    function resolveRequestUrl() {
+        const chatPath = resolveChatPath();
+        if (typeof window === "undefined") {
+            return chatPath;
         }
         const host = window.location.hostname;
         if (host === "127.0.0.1" || host === "localhost") {
-            return "http://127.0.0.1:3001";
+            return `http://127.0.0.1:3001${chatPath}`;
         }
-        // Vercel: middleware proxies /api/assistant/chat to Render (UNIFIT_API_BASE).
-        if (host.endsWith(".vercel.app") || host.endsWith(".vercel.sh")) {
-            return window.location.origin.replace(/\/$/, "");
+        return chatPath;
+    }
+
+    function resolveApiBase() {
+        const requestUrl = resolveRequestUrl();
+        if (requestUrl.startsWith("/")) {
+            return "";
         }
-        return "";
+        try {
+            const url = new URL(requestUrl);
+            return url.origin;
+        } catch {
+            return "";
+        }
     }
 
     function friendlyServerError(data) {
@@ -94,24 +91,16 @@
             };
         }
 
-        const apiBase = resolveApiBase();
-        if (!apiBase) {
-            return {
-                ok: false,
-                error: "The assistant API is not configured for this site.",
-                code: "API_BASE_MISSING",
-            };
-        }
-
         const payload = { message: trimmed };
         if (searchContext && typeof searchContext === "object" && Object.keys(searchContext).length > 0) {
             payload.searchContext = searchContext;
         }
 
+        const requestUrl = resolveRequestUrl();
+
         activeRequest = (async () => {
             try {
-                const chatPath = resolveChatPath();
-                const response = await fetch(`${apiBase}${chatPath}`, {
+                const response = await fetch(requestUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
@@ -168,5 +157,6 @@
         resolveApiBase,
         resolveChatPath,
         resolveGeneratePath: resolveChatPath,
+        resolveRequestUrl,
     };
 }));
